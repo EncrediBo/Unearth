@@ -12,7 +12,7 @@ public class ArrayToFile : MonoBehaviour {
     public ushort[] depth;
 
 	//Change ME to make it work on a new machine!!!
-	private const string path = "C:\\Users\\En Bo\\Documents\\DECO3850\\ushort.txt"; 
+	private const string path = "C:\\Users\\Jacob\\Documents\\DECO3850\\Unearth\\ushort.txt"; 
 
 	public void Test()
 	{
