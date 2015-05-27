@@ -13,8 +13,8 @@ public class SandpitDepthView : MonoBehaviour {
     public ushort[] defaultMap;
 
     //The upper and lower limit in mm
-    public const ushort min = 750;
-    public const ushort max = 880;
+    public const ushort min = 1200;
+    public const ushort max = 1320;
 
     private Texture2D texture;
     private Mesh mesh;
@@ -96,6 +96,7 @@ public class SandpitDepthView : MonoBehaviour {
         renderer.material.mainTexture = texture;
 
         finalMap = startMap;
+
 	}
 
     private void Mapcolour(ushort depth, int i)
@@ -181,5 +182,27 @@ public class SandpitDepthView : MonoBehaviour {
         {
             fromText = true;
         }
+    }
+
+    //Takes a terrain type and returns the array position to spawn to
+    public int getRandomSpawnLocation(byte terrainType)
+    {
+        int terrainQuantity = 0;
+        int[] terrainPos = new int[finalMap.Length];
+        int j = 0;
+
+        for (int i = 0; i < finalMap.Length; i++)
+        {
+            if (finalMap[i] == terrainType)
+            {
+                terrainQuantity += 1;
+                terrainPos[j] = i;
+                j++;
+            }
+        }
+
+        int thing = Random.Range(0, terrainQuantity);
+
+        return terrainPos[thing];
     }
 }

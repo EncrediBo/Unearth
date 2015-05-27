@@ -18,7 +18,7 @@ public abstract class Animal : MonoBehaviour
      */
     //protected int type = 1;
 
-    //location in game space in pixels
+    //location in game space in unity units
     protected float posX;
     protected float posY;
 

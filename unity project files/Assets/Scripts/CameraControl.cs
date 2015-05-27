@@ -10,9 +10,9 @@ public class CameraControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        xPos = 0f;
-        yPos = 0.5f;
-        viewScale = 3.5f;
+        xPos = -0.1f;
+        yPos = 1.2f;
+        viewScale = 3.8f;
 	}
 	
 	// Update is called once per frame

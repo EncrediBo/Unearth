@@ -10,14 +10,23 @@ public class SpawnControl : MonoBehaviour {
     public GameObject seaMan;
     public GameObject landMan;
 
+    public SandpitDepthView sdv;
+
+    //Prefabs for trees
+    public GameObject[] trees;									//Array of tree prefabs.
 
     //All the data keeping track of the stuff that has spawned
     private int seaManCount = 0;
-    private int seaManMax = 5;
+    private int seaManMax = 55;
     private int landManCount = 0;
     private int landManMax = 5;
-    private static bool seaManSpawn = false;
+    private int landPlantCount = 0;
+    private int landPlantMax = 55;
+    private static bool seaManSpawn = true;
     private static bool landManSpawn = false;
+    private static bool landPlantSpawn = true;
+
+    protected const float pixelHeight = 0.023585f;
 
     private static SpawnControl _instance;
 
@@ -34,8 +43,8 @@ public class SpawnControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Instantiate(seaMan);
-        Instantiate(landMan);
+        //Instantiate(seaMan);
+        //Instantiate(landMan);
         _instance = this;
 	}
 	
@@ -46,11 +55,36 @@ public class SpawnControl : MonoBehaviour {
 
         if (seaManSpawn == true && seaManCount < seaManMax)
         {
+            int spawnLoc = sdv.getRandomSpawnLocation(2); //get spawn location in ushort
+            //convert to x and y values
+            int x = spawnLoc % 424;
+            int y = spawnLoc / 424;
+            //convert to canvas values
+            float mapX = (212 - x) * pixelHeight;
+            float mapY = (212 - y) * pixelHeight;
+
             Debug.Log(seaManCount);
             Debug.Log(seaManMax);
-            Instantiate(seaMan, new Vector3(-1.36793f, -1.36793f, 0f), Quaternion.identity);
+            Instantiate(seaMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
             seaManCount++;
-            seaManSpawn = false;
+            //seaManSpawn = false;
+        }
+
+        if (landPlantSpawn == true && landPlantCount < landPlantMax)
+        {
+            int spawnLoc = sdv.getRandomSpawnLocation(1); //get spawn location in ushort
+            //convert to x and y values
+            int x = spawnLoc % 424;
+            int y = spawnLoc / 424;
+            //convert to canvas values
+            float mapX = (212 - x) * pixelHeight;
+            float mapY = (212 - y) * pixelHeight;
+
+            //Debug.Log(seaManCount);
+            //Debug.Log(seaManMax);
+            Instantiate(trees[Random.Range(0, trees.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            landPlantCount++;
+            //seaManSpawn = false;
         }
        
 
@@ -88,5 +122,7 @@ public class SpawnControl : MonoBehaviour {
                 break;
         }
     }
+
+    
 
 }
