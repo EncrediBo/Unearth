@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 499002}
   - 114: {fileID: 11469388}
   - 212: {fileID: 21270026}
+  - 61: {fileID: 6134790}
   m_Layer: 0
   m_Name: Tree_4
   m_TagString: Untagged
@@ -29,6 +30,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!61 &6134790
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194416}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: .680000007, y: .680000007}
 --- !u!114 &11469388
 MonoBehaviour:
   m_ObjectHideFlags: 1

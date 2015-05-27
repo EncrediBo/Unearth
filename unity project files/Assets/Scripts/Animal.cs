@@ -29,6 +29,13 @@ public abstract class Animal : MonoBehaviour
     //Direction of this sprite is facing
     private Direction facing;
 
+
+
+    //Movement speed
+    //Time interval for recalculation
+    private float delay = 0.02f; //Every two seconds
+    private float timer = 0f;
+
     protected int[] heatMap;
 
     protected const float pixelHeight = 0.023585f;
@@ -54,6 +61,17 @@ public abstract class Animal : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        //Timer delay
+        timer += Time.deltaTime;
+        if (timer > delay)
+        {
+            timer = 0f;
+        }
+        else
+        {
+            return;
+        }
+
 
         //Applying position, just in case it is bumped
         LoadPos();
@@ -97,6 +115,12 @@ public abstract class Animal : MonoBehaviour
         DONTMOVE
     }
 
+    void OnTriggerEnter2D(Collider2D coll){
+
+        print("animal got hit");
+        print(coll);
+        coll.gameObject.SetActive(false);
+    }
 
     protected Direction checkHeat (int x, int y, int[] heatMap)
     {

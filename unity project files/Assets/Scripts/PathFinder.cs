@@ -104,8 +104,8 @@ public class PathFinder : MonoBehaviour {
     private void DrawHeatMap()
     {
         doingStuff = true;
-        flood(finalX, finalY, 10000, 1);
-        floodAgain(finalX, finalY, 10000, 2);
+        flood(finalX, finalY, 10000, 2);
+        floodAgain(finalX, finalY, 10000, 1);
     }
 
     private void flood(int xStart, int yStart, int heatStart, byte level)
@@ -149,26 +149,26 @@ public class PathFinder : MonoBehaviour {
             {
                 heatMap2[y * 424 + x] = heat;
 
-                if ((x - 1) > 0 && finalMap[y * 424 + (x - 1)] == level && heatMap2[y * 424 + (x - 1)] == 0)
+                if ((x - 1) > 0 && finalMap[y * 424 + (x - 1)] >= level && heatMap2[y * 424 + (x - 1)] == 0)
                 {
                     xQueue.Enqueue(x - 1);
                     yQueue.Enqueue(y);
                     heatQueue.Enqueue(heat - 1);
                 }
-                if ((x + 1) < 423 && finalMap[y * 424 + (x + 1)] == level && heatMap2[y * 424 + (x + 1)] == 0)
+                if ((x + 1) < 423 && finalMap[y * 424 + (x + 1)] >= level && heatMap2[y * 424 + (x + 1)] == 0)
                 {
                     xQueue.Enqueue(x + 1);
                     yQueue.Enqueue(y);
                     heatQueue.Enqueue(heat - 1);
                 }
 
-                if ((y - 1) > 0 && finalMap[(y - 1) * 424 + x] == level && heatMap2[(y - 1) * 424 + x] == 0)
+                if ((y - 1) > 0 && finalMap[(y - 1) * 424 + x] >= level && heatMap2[(y - 1) * 424 + x] == 0)
                 {
                     xQueue.Enqueue(x);
                     yQueue.Enqueue(y - 1);
                     heatQueue.Enqueue(heat - 1);
                 }
-                if ((y + 1) < 423 && finalMap[(y + 1) * 424 + x] == level && heatMap2[(y + 1) * 424 + x] == 0)
+                if ((y + 1) < 423 && finalMap[(y + 1) * 424 + x] >= level && heatMap2[(y + 1) * 424 + x] == 0)
                 {
                     xQueue.Enqueue(x);
                     yQueue.Enqueue(y + 1);
@@ -221,26 +221,26 @@ public class PathFinder : MonoBehaviour {
             {
                 heatMap1[y * 424 + x] = heat;
 
-                if ((x - 1) > 0 && finalMap[y * 424 + (x - 1)] == level && heatMap1[y * 424 + (x - 1)] == 0)
+                if ((x - 1) > 0 && finalMap[y * 424 + (x - 1)] <= level && heatMap1[y * 424 + (x - 1)] == 0)
                 {
                     xQueue.Enqueue(x - 1);
                     yQueue.Enqueue(y);
                     heatQueue.Enqueue(heat - 1);
                 }
-                if ((x + 1) < 423 && finalMap[y * 424 + (x + 1)] == level && heatMap1[y * 424 + (x + 1)] == 0)
+                if ((x + 1) < 423 && finalMap[y * 424 + (x + 1)] <= level && heatMap1[y * 424 + (x + 1)] == 0)
                 {
                     xQueue.Enqueue(x + 1);
                     yQueue.Enqueue(y);
                     heatQueue.Enqueue(heat - 1);
                 }
 
-                if ((y - 1) > 0 && finalMap[(y - 1) * 424 + x] == level && heatMap1[(y - 1) * 424 + x] == 0)
+                if ((y - 1) > 0 && finalMap[(y - 1) * 424 + x] <= level && heatMap1[(y - 1) * 424 + x] == 0)
                 {
                     xQueue.Enqueue(x);
                     yQueue.Enqueue(y - 1);
                     heatQueue.Enqueue(heat - 1);
                 }
-                if ((y + 1) < 423 && finalMap[(y + 1) * 424 + x] == level && heatMap1[(y + 1) * 424 + x] == 0)
+                if ((y + 1) < 423 && finalMap[(y + 1) * 424 + x] <= level && heatMap1[(y + 1) * 424 + x] == 0)
                 {
                     xQueue.Enqueue(x);
                     yQueue.Enqueue(y + 1);

@@ -27,7 +27,8 @@ public class SandpitDepthView : MonoBehaviour {
 
     private bool once = true;
 
-    private bool fromText = false;
+    //true if from kinect, false if read from files
+    private bool fromText = false; 
 
     private Renderer renderer;
 
@@ -114,7 +115,7 @@ public class SandpitDepthView : MonoBehaviour {
             colourDepth[i * 4 + 1] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
             colourDepth[i * 4 + 2] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
             colourDepth[i * 4 + 3] = 255;
-            startMap[i] = 1;
+            startMap[i] = 5;
         }
         else if (depth < (max - layerDepth*2) && depth > (max - layerDepth*3))
         {
@@ -123,7 +124,7 @@ public class SandpitDepthView : MonoBehaviour {
             colourDepth[i * 4 + 1] = (byte)150;
             colourDepth[i * 4 + 2] = 150;
             colourDepth[i * 4 + 3] = 255;
-            startMap[i] = 1;
+            startMap[i] = 4;
         }
         else if (depth < (max - layerDepth) && depth > (max - layerDepth*2))
         {
@@ -132,7 +133,7 @@ public class SandpitDepthView : MonoBehaviour {
             colourDepth[i * 4 + 1] = (byte)(255f - (105 * (float)((height- layerDepth) / layerDepth)));//150;
             colourDepth[i * 4 + 2] = 15;
             colourDepth[i * 4 + 3] = 150;
-            startMap[i] = 1;
+            startMap[i] = 3;
         }
         else if (depth < max && depth > (max - layerDepth))
         {
@@ -141,7 +142,7 @@ public class SandpitDepthView : MonoBehaviour {
             colourDepth[i * 4 + 1] = (byte)225;
             colourDepth[i * 4 + 2] = 5;
             colourDepth[i * 4 + 3] = 255;
-            startMap[i] = 1;
+            startMap[i] = 2;
         }
         else if (depth >= max)
         {
@@ -150,7 +151,7 @@ public class SandpitDepthView : MonoBehaviour {
             colourDepth[i * 4 + 1] = (byte)(50f +(25f * (float)((height) / layerDepth)));
             colourDepth[i * 4 + 2] = (byte)(255f +(155 * (float)((height) / layerDepth)));
             colourDepth[i * 4 + 3] = 255; //(byte)(100 *(float)((height) / layerDepth));
-            startMap[i] = 2;
+            startMap[i] = 1;
         }
         else
         {

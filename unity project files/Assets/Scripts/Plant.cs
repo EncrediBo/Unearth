@@ -51,6 +51,11 @@ public abstract class Plant : MonoBehaviour {
         mapY = (int)(212 - (posY / pixelHeight));
     }
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        print("plant got hit");
+    }
+
     protected void Kill()
     {
         Destroy(this.gameObject);
