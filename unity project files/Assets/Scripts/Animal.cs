@@ -29,9 +29,10 @@ public abstract class Animal : MonoBehaviour
     //Direction of this sprite is facing
     private Direction facing;
 
+    protected State myState = State.Idle;
+    protected int myStateDuration = 0;
 
-
-    //Movement speed
+    //Movement speed delay
     //Time interval for recalculation
     private float delay = 0.02f; //Every two seconds
     private float timer = 0f;
@@ -64,24 +65,14 @@ public abstract class Animal : MonoBehaviour
         //Choose which heat map as path finding guide
         heatMap = pathFinder.getHeatMap(type);
 
-        //Timer delay
-        timer += Time.deltaTime;
-        if (timer > delay)
-        {
-            timer = 0f;
-        }
-        else
-        {
-            return;
-        }
-
-
         //Applying position, just in case it is bumped
         LoadPos();
 
         //Spawning code
         if (heatMap[mapY * 424 + mapX] == -1)//|| heatMap[mapY * 424 + mapX] == 0)
         {
+            //The animal is currently in a terrain that it cannot move in
+
             return;
         }
 
@@ -92,17 +83,25 @@ public abstract class Animal : MonoBehaviour
             //spawnControl.Spawn(-(type));
 
         }
-        else if (heatMap[mapY * 424 + mapX] == 9900)
-        {
-            //spawnControl.Spawn(type);
+
+        if(myStateDuration >= 120) {
+            ChangeState(State.Eating);
         }
-        else if (heatMap[mapY * 424 + mapX] == 9850)
-        {
-            //don't know yet
+
+        switch (myState){
+            case State.Idle:
+                myStateDuration++;
+                break;
         }
 
         //moves character using current position and the heatmap choosen
         Move(checkHeat(mapX, mapY, heatMap));
+    }
+
+    protected void ChangeState(State state)
+    {
+        myStateDuration = 0;
+        myState = state;
     }
 
     public enum Direction
@@ -118,9 +117,27 @@ public abstract class Animal : MonoBehaviour
         DONTMOVE
     }
 
+    public enum State
+    {
+        Eating,
+        Seeking,
+        Idle,
+        Hunting,
+        Hurting,
+        Drowning,
+        Dying,
+        Dance
+    }
+
     void OnTriggerEnter2D(Collider2D coll){
 
         print("animal got hit");
+        if(coll.tag.Equals("Food")){
+            print("nom nom nom");
+            ChangeState(State.Eating);
+        } else {
+            print("Ouch");
+        }
         print(coll);
         //coll.gameObject.SetActive(false);
     }
@@ -269,6 +286,16 @@ public abstract class Animal : MonoBehaviour
     protected void Move(Direction dir)
     {
         //Debug.Log(i);
+        //Movement delay
+        timer += Time.deltaTime;
+        if (timer > delay)
+        {
+            timer = 0f;
+        }
+        else
+        {
+            return;
+        }
 
         switch (dir)
         {
@@ -326,6 +353,7 @@ public abstract class Animal : MonoBehaviour
     protected virtual void Kill()
     {
         //Talk to spawn
+        Debug.Log(type);
         spawnControl.Spawn(-type);
         Destroy(this.gameObject);
     }

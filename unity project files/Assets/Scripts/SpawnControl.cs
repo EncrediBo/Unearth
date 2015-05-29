@@ -23,7 +23,7 @@ public class SpawnControl : MonoBehaviour {
 
     private int landManCount = 0;
     private int landManMax = 5;
-    private static bool landManSpawn = false;
+    private static bool landManSpawn = true;
 
     private int landPlantCount = 0;
     private int landPlantMax = 5555555;
@@ -34,11 +34,11 @@ public class SpawnControl : MonoBehaviour {
     private static bool seaPlantSpawn = true;
 
     private int landKillerCount = 0;
-    private int landKillerMax = 5555555;
+    private int landKillerMax = 1;
     private static bool landKillerSpawn = true;
 
     private int seaKillerCount = 0;
-    private int seaKillerMax = 5555555;
+    private int seaKillerMax = 1;
     private static bool seaKillerSpawn = true;
 
     protected const float pixelHeight = 0.023585f;
@@ -58,8 +58,6 @@ public class SpawnControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //Instantiate(seaMan);
-        //Instantiate(landMan);
         _instance = this;
 	}
 	
@@ -67,6 +65,22 @@ public class SpawnControl : MonoBehaviour {
 	void Update () {
         //finalMap = sdv.getMap();
         //Debug.Log("seamancount smaller than seamanmax: "+ (seaManCount < seaManMax));
+        if (landManSpawn == true && landManCount < landManMax)
+        {
+            int spawnLoc = sdv.getRandomSpawnLocation(3); //get spawn location in ushort
+            //convert to x and y values
+            int x = spawnLoc % 424;
+            int y = spawnLoc / 424;
+            //convert to canvas values
+            float mapX = (212 - x) * pixelHeight;
+            float mapY = (212 - y) * pixelHeight;
+
+            Debug.Log(landManCount);
+            Debug.Log(landManMax);
+            Instantiate(landMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            landManCount++;
+            //seaManSpawn = false;
+        }
 
         if (seaManSpawn == true && seaManCount < seaManMax)
         {
@@ -78,8 +92,8 @@ public class SpawnControl : MonoBehaviour {
             float mapX = (212 - x) * pixelHeight;
             float mapY = (212 - y) * pixelHeight;
 
-            Debug.Log(seaManCount);
-            Debug.Log(seaManMax);
+            //Debug.Log(seaManCount);
+            //Debug.Log(seaManMax);
             Instantiate(seaMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
             seaManCount++;
             //seaManSpawn = false;
@@ -138,7 +152,7 @@ public class SpawnControl : MonoBehaviour {
                 seaManCount--;
                 break;
             case 2:
-                landManCount++;
+                seaManCount++;
                 break;
             case -3:
                 landPlantCount--;
@@ -153,16 +167,16 @@ public class SpawnControl : MonoBehaviour {
                 seaPlantCount++;
                 break;
             case -5:
-                seaPlantCount--;
+                landKillerCount--;
                 break;
             case 5:
-                seaPlantCount++;
+                landKillerCount++;
                 break;
             case -6:
-                seaPlantCount--;
+                landKillerCount--;
                 break;
             case 6:
-                seaPlantCount++;
+                landKillerCount++;
                 break;
             default:
                 break;
