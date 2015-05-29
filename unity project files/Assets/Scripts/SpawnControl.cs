@@ -12,13 +12,13 @@ public class SpawnControl : MonoBehaviour {
 
     public SandpitDepthView sdv;
 
-    //Prefabs for trees
-    public GameObject[] trees;  //Array of tree prefabs.
-    public GameObject[] seaWeeds;	//Array of sea plants prefabs
+    //Prefabs for plants
+    public GameObject[] landPlants;  //Array of tree prefabs.
+    public GameObject[] seaPlants;	//Array of sea plants prefabs
 
     //All the data keeping track of the stuff that has spawned
     private int seaManCount = 0;
-    private int seaManMax = 5555;
+    private int seaManMax = 25;
     private static bool seaManSpawn = true;
 
     private int landManCount = 0;
@@ -30,8 +30,16 @@ public class SpawnControl : MonoBehaviour {
     private static bool landPlantSpawn = true;
 
     private int seaPlantCount = 0;
-    private int seaPlantMax = 5555555;
+    private int seaPlantMax = 25;
     private static bool seaPlantSpawn = true;
+
+    private int landKillerCount = 0;
+    private int landKillerMax = 5555555;
+    private static bool landKillerSpawn = true;
+
+    private int seaKillerCount = 0;
+    private int seaKillerMax = 5555555;
+    private static bool seaKillerSpawn = true;
 
     protected const float pixelHeight = 0.023585f;
 
@@ -89,7 +97,7 @@ public class SpawnControl : MonoBehaviour {
 
             //Debug.Log(seaManCount);
             //Debug.Log(seaManMax);
-            Instantiate(trees[Random.Range(0, trees.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            Instantiate(landPlants[Random.Range(0, landPlants.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
             landPlantCount++;
             //seaManSpawn = false;
         }
@@ -106,7 +114,7 @@ public class SpawnControl : MonoBehaviour {
 
             //Debug.Log(seaManCount);
             //Debug.Log(seaManMax);
-            Instantiate(seaWeeds[Random.Range(0, seaWeeds.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            Instantiate(seaPlants[Random.Range(0, seaPlants.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
             seaPlantCount++;
             //seaManSpawn = false;
         }
@@ -116,7 +124,7 @@ public class SpawnControl : MonoBehaviour {
 	}
 
 
-    void Spawn(int type)
+    public void Spawn(int type)
     {
         switch (type)
         {
@@ -124,23 +132,37 @@ public class SpawnControl : MonoBehaviour {
                 landManCount--;
                 break;
             case 1:
-                if (landManSpawn == true && landManCount < landManMax)//&& landManCount < landManMax)
-                {
-                    Instantiate(landMan);
-                    landManCount++;
-                    landManSpawn = false;
-                }
+                landManCount++;
                 break;
             case -2:
                 seaManCount--;
                 break;
             case 2:
-                if (landManSpawn == true && landManCount < landManMax)//&& landManCount < landManMax)
-                {
-                    Instantiate(landMan);
-                    landManCount++;
-                    landManSpawn = false;
-                }
+                landManCount++;
+                break;
+            case -3:
+                landPlantCount--;
+                break;
+            case 3:
+                landPlantCount++;
+                break;
+            case -4:
+                seaPlantCount--;
+                break;
+            case 4:
+                seaPlantCount++;
+                break;
+            case -5:
+                seaPlantCount--;
+                break;
+            case 5:
+                seaPlantCount++;
+                break;
+            case -6:
+                seaPlantCount--;
+                break;
+            case 6:
+                seaPlantCount++;
                 break;
             default:
                 break;

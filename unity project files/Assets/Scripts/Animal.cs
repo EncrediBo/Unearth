@@ -16,7 +16,7 @@ public abstract class Animal : MonoBehaviour
      * 2 = seaMan
      * 
      */
-    //protected int type = 1;
+    protected int type = 1;
 
     //location in game space in unity units
     protected float posX;
@@ -61,6 +61,9 @@ public abstract class Animal : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        //Choose which heat map as path finding guide
+        heatMap = pathFinder.getHeatMap(type);
+
         //Timer delay
         timer += Time.deltaTime;
         if (timer > delay)
@@ -85,7 +88,7 @@ public abstract class Animal : MonoBehaviour
         if (heatMap[mapY * 424 + mapX] == 10000)
         {
             //spawnControl.Spawn(type);
-            Destroy(this.gameObject);
+            Kill();
             //spawnControl.Spawn(-(type));
 
         }
@@ -119,7 +122,7 @@ public abstract class Animal : MonoBehaviour
 
         print("animal got hit");
         print(coll);
-        coll.gameObject.SetActive(false);
+        //coll.gameObject.SetActive(false);
     }
 
     protected Direction checkHeat (int x, int y, int[] heatMap)
@@ -318,6 +321,13 @@ public abstract class Animal : MonoBehaviour
                 break;
         }
 
+    }
+
+    protected virtual void Kill()
+    {
+        //Talk to spawn
+        spawnControl.Spawn(-type);
+        Destroy(this.gameObject);
     }
 
     protected void LoadPos (){

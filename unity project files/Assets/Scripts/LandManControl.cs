@@ -6,11 +6,13 @@ public class LandManControl : Animal
 {
 
     // Use this for initialization
+    protected override void Start()
+    {
+        type = 1;
+        base.Start();
+    }
     protected override void Update()
     {
-        //Choose which heat map as path finding guide
-        heatMap = pathFinder.getHeatMap(1);
-
         base.Update();
     }
 
