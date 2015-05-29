@@ -22,6 +22,8 @@ public abstract class Plant : MonoBehaviour {
     protected int mapX;
     protected int mapY;
 
+    private int life = 0;
+
     protected const float pixelHeight = 0.023585f;
 
 	// Use this for initialization
@@ -37,6 +39,11 @@ public abstract class Plant : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected virtual void Update () {
+        life++;
+        if (life > 300)
+        {
+            Kill();
+        }
 	    //This needs to check the land condition to consider if it is dead or not
 	}
 
@@ -59,6 +66,7 @@ public abstract class Plant : MonoBehaviour {
     protected void Kill()
     {
         Destroy(this.gameObject);
+        life = 0;
         //or you could use the code below to hide it
         //transform.position += new Vector3(0f, 0f, -11f);
     }
