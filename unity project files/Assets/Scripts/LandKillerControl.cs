@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class SeaManControl : Animal
-{
+public class LandKillerControl : Animal {
+
     // Use this for initialization
     protected override void Start()
     {
-        type = 2;
+        type = 5;
         base.Start();
     }
-    // Use this for initialization
+
+    // Update is called once per frame
     protected override void Update()
     {
-        if (myStateDuration >= 90)
+
+        if (myState == State.Idle || myStateDuration >= 90)
         {
             ChangeState(State.Hunting);
         }
 
         base.Update();
+
+
     }
 }

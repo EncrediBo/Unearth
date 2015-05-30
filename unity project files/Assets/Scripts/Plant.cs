@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public abstract class Plant : MonoBehaviour {
 
+    public SpawnControl spawnControl;
     public PathFinder pathFinder;
 
     //Creature type
@@ -22,12 +23,23 @@ public abstract class Plant : MonoBehaviour {
     protected int mapX;
     protected int mapY;
 
+    //Age of the plant
+    private int life = 0;
+
+    //Map of terrain
+
+
     protected const float pixelHeight = 0.023585f;
 
 	// Use this for initialization
 	protected virtual void Start () {
 	    //Load the position and map position
         LoadPos();
+
+        if (spawnControl == null)
+        {
+            spawnControl = SpawnControl.Instance();
+        }
 
         if (pathFinder == null)
         {
@@ -37,6 +49,13 @@ public abstract class Plant : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected virtual void Update () {
+
+        life++;
+
+        if (life > 3000)
+        {
+            Kill();
+        }
 	    //This needs to check the land condition to consider if it is dead or not
 	}
 
@@ -51,16 +70,18 @@ public abstract class Plant : MonoBehaviour {
         mapY = (int)(212 - (posY / pixelHeight));
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    protected void OnTriggerEnter2D(Collider2D coll)
     {
         print("plant got hit");
+        Kill();
     }
 
-    protected void Kill()
+    protected virtual void Kill()
     {
+        //Talk to spawn
+        spawnControl.Spawn(-type);
         Destroy(this.gameObject);
-        //or you could use the code below to hide it
-        //transform.position += new Vector3(0f, 0f, -11f);
+        life = 0;
     }
 
     //Public functions that allow the animal to interact with other elements

@@ -12,28 +12,39 @@ public class SpawnControl : MonoBehaviour {
 
     public SandpitDepthView sdv;
 
-    //Prefabs for trees
-    public GameObject[] trees;  //Array of tree prefabs.
-    public GameObject[] seaWeeds;	//Array of sea plants prefabs
+    //Prefabs for plants
+    public GameObject[] landPlants;  //Array of tree prefabs.
+    public GameObject[] seaPlants;	//Array of sea plants prefabs
 
     //All the data keeping track of the stuff that has spawned
     private int seaManCount = 0;
-    private int seaManMax = 55;
+    private int seaManMax = 25;
     private static bool seaManSpawn = true;
 
     private int landManCount = 0;
     private int landManMax = 5;
-    private static bool landManSpawn = false;
+    private static bool landManSpawn = true;
 
     private int landPlantCount = 0;
-    private int landPlantMax = 55;
+    private int landPlantMax = 100;
     private static bool landPlantSpawn = true;
 
     private int seaPlantCount = 0;
-    private int seaPlantMax = 55;
+    private int seaPlantMax = 25;
     private static bool seaPlantSpawn = true;
 
+    private int landKillerCount = 0;
+    private int landKillerMax = 1;
+    private static bool landKillerSpawn = true;
+
+    private int seaKillerCount = 0;
+    private int seaKillerMax = 1;
+    private static bool seaKillerSpawn = true;
+
     protected const float pixelHeight = 0.023585f;
+
+    //Initial spawn delay in seconds, to wait for the kinect
+    private float delay = 2f; //Every two seconds
 
     private static SpawnControl _instance;
 
@@ -50,15 +61,34 @@ public class SpawnControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //Instantiate(seaMan);
-        //Instantiate(landMan);
         _instance = this;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (delay > 0f)
+        {
+            delay -= Time.deltaTime;
+            return;
+        }
         //finalMap = sdv.getMap();
         //Debug.Log("seamancount smaller than seamanmax: "+ (seaManCount < seaManMax));
+        if (landManSpawn == true && landManCount < landManMax)
+        {
+            int spawnLoc = sdv.getRandomSpawnLocation(3); //get spawn location in ushort
+            //convert to x and y values
+            int x = spawnLoc % 424;
+            int y = spawnLoc / 424;
+            //convert to canvas values
+            float mapX = (212 - x) * pixelHeight;
+            float mapY = (212 - y) * pixelHeight;
+
+            //Debug.Log(landManCount);
+            //Debug.Log(landManMax);
+            Instantiate(landMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            landManCount++;
+            //seaManSpawn = false;
+        }
 
         if (seaManSpawn == true && seaManCount < seaManMax)
         {
@@ -70,8 +100,8 @@ public class SpawnControl : MonoBehaviour {
             float mapX = (212 - x) * pixelHeight;
             float mapY = (212 - y) * pixelHeight;
 
-            Debug.Log(seaManCount);
-            Debug.Log(seaManMax);
+            //Debug.Log(seaManCount);
+            //Debug.Log(seaManMax);
             Instantiate(seaMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
             seaManCount++;
             //seaManSpawn = false;
@@ -89,7 +119,7 @@ public class SpawnControl : MonoBehaviour {
 
             //Debug.Log(seaManCount);
             //Debug.Log(seaManMax);
-            Instantiate(trees[Random.Range(0, trees.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            Instantiate(landPlants[Random.Range(0, landPlants.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
             landPlantCount++;
             //seaManSpawn = false;
         }
@@ -106,7 +136,7 @@ public class SpawnControl : MonoBehaviour {
 
             //Debug.Log(seaManCount);
             //Debug.Log(seaManMax);
-            Instantiate(seaWeeds[Random.Range(0, seaWeeds.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            Instantiate(seaPlants[Random.Range(0, seaPlants.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
             seaPlantCount++;
             //seaManSpawn = false;
         }
@@ -116,7 +146,7 @@ public class SpawnControl : MonoBehaviour {
 	}
 
 
-    void Spawn(int type)
+    public void Spawn(int type)
     {
         switch (type)
         {
@@ -124,23 +154,37 @@ public class SpawnControl : MonoBehaviour {
                 landManCount--;
                 break;
             case 1:
-                if (landManSpawn == true && landManCount < landManMax)//&& landManCount < landManMax)
-                {
-                    Instantiate(landMan);
-                    landManCount++;
-                    landManSpawn = false;
-                }
+                landManCount++;
                 break;
             case -2:
                 seaManCount--;
                 break;
             case 2:
-                if (landManSpawn == true && landManCount < landManMax)//&& landManCount < landManMax)
-                {
-                    Instantiate(landMan);
-                    landManCount++;
-                    landManSpawn = false;
-                }
+                seaManCount++;
+                break;
+            case -3:
+                landPlantCount--;
+                break;
+            case 3:
+                landPlantCount++;
+                break;
+            case -4:
+                seaPlantCount--;
+                break;
+            case 4:
+                seaPlantCount++;
+                break;
+            case -5:
+                landKillerCount--;
+                break;
+            case 5:
+                landKillerCount++;
+                break;
+            case -6:
+                seaKillerCount--;
+                break;
+            case 6:
+                seaKillerCount++;
                 break;
             default:
                 break;

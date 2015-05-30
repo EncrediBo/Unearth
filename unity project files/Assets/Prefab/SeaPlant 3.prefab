@@ -13,7 +13,7 @@ GameObject:
   - 61: {fileID: 6154076}
   m_Layer: 0
   m_Name: SeaPlant 3
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946be9e4e79a1044e855848f33db6203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathFinder: {fileID: 0}
+  spawnControl: {fileID: 0}
 --- !u!212 &21218352
 SpriteRenderer:
   m_ObjectHideFlags: 1
