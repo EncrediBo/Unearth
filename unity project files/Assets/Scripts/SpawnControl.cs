@@ -26,7 +26,7 @@ public class SpawnControl : MonoBehaviour {
     private static bool landManSpawn = true;
 
     private int landPlantCount = 0;
-    private int landPlantMax = 5555555;
+    private int landPlantMax = 100;
     private static bool landPlantSpawn = true;
 
     private int seaPlantCount = 0;
@@ -42,6 +42,9 @@ public class SpawnControl : MonoBehaviour {
     private static bool seaKillerSpawn = true;
 
     protected const float pixelHeight = 0.023585f;
+
+    //Initial spawn delay in seconds, to wait for the kinect
+    private float delay = 2f; //Every two seconds
 
     private static SpawnControl _instance;
 
@@ -63,6 +66,11 @@ public class SpawnControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (delay > 0f)
+        {
+            delay -= Time.deltaTime;
+            return;
+        }
         //finalMap = sdv.getMap();
         //Debug.Log("seamancount smaller than seamanmax: "+ (seaManCount < seaManMax));
         if (landManSpawn == true && landManCount < landManMax)
@@ -75,8 +83,8 @@ public class SpawnControl : MonoBehaviour {
             float mapX = (212 - x) * pixelHeight;
             float mapY = (212 - y) * pixelHeight;
 
-            Debug.Log(landManCount);
-            Debug.Log(landManMax);
+            //Debug.Log(landManCount);
+            //Debug.Log(landManMax);
             Instantiate(landMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
             landManCount++;
             //seaManSpawn = false;
@@ -173,10 +181,10 @@ public class SpawnControl : MonoBehaviour {
                 landKillerCount++;
                 break;
             case -6:
-                landKillerCount--;
+                seaKillerCount--;
                 break;
             case 6:
-                landKillerCount++;
+                seaKillerCount++;
                 break;
             default:
                 break;

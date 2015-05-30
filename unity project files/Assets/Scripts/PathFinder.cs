@@ -13,7 +13,7 @@ public class PathFinder : MonoBehaviour {
     public float timer = 0f;
 
     //Heatmap used for AI pathfinding
-    private byte[] finalMap;
+    private static byte[] finalMap;
     private int[] heatMap1;
     private int[] heatMap2;
     private int[] heatMapLandPlant;
@@ -91,7 +91,7 @@ public class PathFinder : MonoBehaviour {
                 return heatMap1;
             case 3:
                 //Land animal
-                return heatMap1;
+                return heatMap2;
             case 4:
                 //Sea animal
                 return heatMap1;
@@ -263,6 +263,10 @@ public class PathFinder : MonoBehaviour {
         SouthEast,
         SouthWest,
         Start
+    }
+
+    public byte getTerrain(int x, int y){
+        return finalMap[y * 424 + (x + 1)];
     }
 
 }

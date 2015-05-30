@@ -2569,6 +2569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnControl: {fileID: 0}
+  pathFinder: {fileID: 0}
 --- !u!4 &1915873104
 Transform:
   m_ObjectHideFlags: 0

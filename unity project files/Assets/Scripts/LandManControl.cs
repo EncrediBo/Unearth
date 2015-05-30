@@ -13,6 +13,11 @@ public class LandManControl : Animal
     }
     protected override void Update()
     {
+        if (myStateDuration >= 90)
+        {
+            ChangeState(State.Hunting);
+        }
+
         base.Update();
     }
 

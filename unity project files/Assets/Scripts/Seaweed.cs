@@ -10,4 +10,13 @@ public class Seaweed : Plant {
         base.Start();
     } 
 	// Update is called once per frame
+    protected override void Update()
+    {
+        if (pathFinder.getTerrain(mapX, mapY) >= 2)
+        {
+            //If i am NOT in water, i die
+            Kill();
+        }
+ 	     base.Update();
+    }
 }

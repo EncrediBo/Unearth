@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public abstract class Plant : MonoBehaviour {
 
     public SpawnControl spawnControl;
+    public PathFinder pathFinder;
 
     //Creature type
     /*
@@ -25,6 +26,9 @@ public abstract class Plant : MonoBehaviour {
     //Age of the plant
     private int life = 0;
 
+    //Map of terrain
+
+
     protected const float pixelHeight = 0.023585f;
 
 	// Use this for initialization
@@ -36,12 +40,19 @@ public abstract class Plant : MonoBehaviour {
         {
             spawnControl = SpawnControl.Instance();
         }
+
+        if (pathFinder == null)
+        {
+            pathFinder = PathFinder.Instance();
+        }
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update () {
+
         life++;
-        if (life > 300)
+
+        if (life > 3000)
         {
             Kill();
         }
@@ -62,7 +73,6 @@ public abstract class Plant : MonoBehaviour {
     protected void OnTriggerEnter2D(Collider2D coll)
     {
         print("plant got hit");
-        spawnControl.Spawn(1);
         Kill();
     }
 
