@@ -214,14 +214,14 @@ public abstract class Animal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll){
 
-        print("animal got hit");
+       // print("animal got hit");
         if(coll.tag.Equals("Food")){
-            print("nom nom nom");
+            //print("nom nom nom");
             //ChangeState(State.Eating);
         } else {
-            print("Ouch");
+           // print("Ouch");
         }
-        print(coll);
+        //print(coll);
         //coll.gameObject.SetActive(false);
     }
 
@@ -453,12 +453,12 @@ public abstract class Animal : MonoBehaviour
 
         int rnd = Random.Range(1, 408);
         if (rnd > 400){
-            Debug.Log("going wiht me guts");
+            //Debug.Log("going wiht me guts");
             return NumToDir(rnd - 400);
         }
         else
         {
-            Debug.Log("keep going");
+           // Debug.Log("keep going");
             return facing;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class SandpitDepthView : MonoBehaviour {
 
@@ -31,6 +32,11 @@ public class SandpitDepthView : MonoBehaviour {
     private bool fromText = false; 
 
     private Renderer renderer;
+
+    //View port variable
+    public int viewScale = 212;
+    public int viewX = 212;
+    public int viewY = 212;
 
 	// Use this for initialization
 	void Start () {
@@ -107,60 +113,73 @@ public class SandpitDepthView : MonoBehaviour {
         float layerDepth = (max - min) / 4; 
         thisDepth -= min;
         float height = (float)max - (float)depth;
-
-        if (depth > min && depth <= (min + layerDepth))
+        int xPos = i % 424;
+        int yPos = i / 424;
+        if (isInCircle(xPos, yPos) == true)
         {
-            //If the depth is above the boundary, snowy peaks
-            colourDepth[i * 4 + 0] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
-            colourDepth[i * 4 + 1] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
-            colourDepth[i * 4 + 2] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
-            colourDepth[i * 4 + 3] = 255;
-            startMap[i] = 5;
-        }
-        else if (depth < (max - layerDepth*2) && depth > (max - layerDepth*3))
-        {
-            //Barren mountain ranges
-            colourDepth[i * 4 + 0] = (byte)150;
-            colourDepth[i * 4 + 1] = (byte)150;
-            colourDepth[i * 4 + 2] = 150;
-            colourDepth[i * 4 + 3] = 255;
-            startMap[i] = 4;
-        }
-        else if (depth < (max - layerDepth) && depth > (max - layerDepth*2))
-        {
-            //Forest and woodland
-            colourDepth[i * 4 + 0] = 25;
-            colourDepth[i * 4 + 1] = (byte)(255f - (105 * (float)((height- layerDepth) / layerDepth)));//150;
-            colourDepth[i * 4 + 2] = 15;
-            colourDepth[i * 4 + 3] = 150;
-            startMap[i] = 3;
-        }
-        else if (depth < max && depth > (max - layerDepth))
-        {
-            //Shallow bank and grassland
-            colourDepth[i * 4 + 0] = (byte)(255f - (255f * (float)((height) / layerDepth)));
-            colourDepth[i * 4 + 1] = (byte)225;
-            colourDepth[i * 4 + 2] = 5;
-            colourDepth[i * 4 + 3] = 255;
-            startMap[i] = 2;
-        }
-        else if (depth >= max)
-        {
-            //Water
-            colourDepth[i * 4 + 0] = 0;
-            colourDepth[i * 4 + 1] = (byte)(50f +(25f * (float)((height) / layerDepth)));
-            colourDepth[i * 4 + 2] = (byte)(255f +(155 * (float)((height) / layerDepth)));
-            colourDepth[i * 4 + 3] = 255; //(byte)(100 *(float)((height) / layerDepth));
-            startMap[i] = 1;
+            if (depth > min && depth <= (min + layerDepth))
+            {
+                //If the depth is above the boundary, snowy peaks
+                colourDepth[i * 4 + 0] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+                colourDepth[i * 4 + 1] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+                colourDepth[i * 4 + 2] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+                colourDepth[i * 4 + 3] = 255;
+                startMap[i] = 5;
+            }
+            else if (depth < (max - layerDepth * 2) && depth > (max - layerDepth * 3))
+            {
+                //Barren mountain ranges
+                colourDepth[i * 4 + 0] = (byte)150;
+                colourDepth[i * 4 + 1] = (byte)150;
+                colourDepth[i * 4 + 2] = 150;
+                colourDepth[i * 4 + 3] = 255;
+                startMap[i] = 4;
+            }
+            else if (depth < (max - layerDepth) && depth > (max - layerDepth * 2))
+            {
+                //Forest and woodland
+                colourDepth[i * 4 + 0] = 25;
+                colourDepth[i * 4 + 1] = (byte)(255f - (105 * (float)((height - layerDepth) / layerDepth)));//150;
+                colourDepth[i * 4 + 2] = 15;
+                colourDepth[i * 4 + 3] = 150;
+                startMap[i] = 3;
+            }
+            else if (depth < max && depth > (max - layerDepth))
+            {
+                //Shallow bank and grassland
+                colourDepth[i * 4 + 0] = (byte)(255f - (255f * (float)((height) / layerDepth)));
+                colourDepth[i * 4 + 1] = (byte)225;
+                colourDepth[i * 4 + 2] = 5;
+                colourDepth[i * 4 + 3] = 255;
+                startMap[i] = 2;
+            }
+            else if (depth >= max)
+            {
+                //Water
+                colourDepth[i * 4 + 0] = 0;
+                colourDepth[i * 4 + 1] = (byte)(50f + (25f * (float)((height) / layerDepth)));
+                colourDepth[i * 4 + 2] = (byte)(255f + (155 * (float)((height) / layerDepth)));
+                colourDepth[i * 4 + 3] = 255; //(byte)(100 *(float)((height) / layerDepth));
+                startMap[i] = 1;
+            }
+            else
+            {
+                colourDepth[i * 4 + 0] = 0;
+                colourDepth[i * 4 + 1] = 0;
+                colourDepth[i * 4 + 2] = 0;
+                colourDepth[i * 4 + 3] = 0;
+                startMap[i] = 0;
+            }
         }
         else
         {
-            colourDepth[i * 4 + 0] = 0;
-            colourDepth[i * 4 + 1] = 0;
-            colourDepth[i * 4 + 2] = 0;
-            colourDepth[i * 4 + 3] = 255;
+            colourDepth[i * 4 + 0] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+            colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+            colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+            colourDepth[i * 4 + 3] = 0;
             startMap[i] = 0;
         }
+
     }
 
     private void fillColour(int i, ushort depth)
@@ -202,8 +221,22 @@ public class SandpitDepthView : MonoBehaviour {
             }
         }
 
-        int thing = Random.Range(0, terrainQuantity);
+        int thing = UnityEngine.Random.Range(0, terrainQuantity);
 
         return terrainPos[thing];
     }
+
+    //Takes x and y values and checks if position is inside circle of certain scale
+    public bool isInCircle(int x, int y)
+    {
+        if(Math.Pow(x - viewX, 2) + Math.Pow(y - viewY, 2) <= Math.Pow(viewScale, 2)){
+            //print("inCircle");
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+   
 }

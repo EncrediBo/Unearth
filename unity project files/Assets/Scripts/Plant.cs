@@ -72,7 +72,7 @@ public abstract class Plant : MonoBehaviour {
 
     protected void OnTriggerEnter2D(Collider2D coll)
     {
-        print("plant got hit");
+       // print("plant got hit");
         Kill();
     }
 
