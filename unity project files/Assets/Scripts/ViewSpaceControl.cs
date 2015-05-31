@@ -8,6 +8,8 @@ public class ViewSpaceControl : MonoBehaviour {
     private float xPos;
     private float yPos;
 
+    private bool redraw = true;
+
 	// Use this for initialization
 	void Start () {
         viewScale = 163;
@@ -22,35 +24,47 @@ public class ViewSpaceControl : MonoBehaviour {
         spd.viewScale = (int)viewScale;
         spd.viewX = (int)xPos;
         spd.viewY = (int)yPos;
+
+        if (redraw)
+        {
+            redraw = false;
+            spd.DrawMaskingCircle();
+        }
 	}
 
     public void zoomIn()
     {
         viewScale -= 1f;
+        redraw = true;
     }
 
     public void zoomOut()
     {
         viewScale += 1f;
+        redraw = true;
     }
 
     public void moveUp()
     {
         yPos -= 1f;
+        redraw = true;
     }
 
     public void moveDown()
     {
         yPos += 1f;
+        redraw = true;
     }
 
     public void moveLeft()
     {
         xPos += 1f;
+        redraw = true;
     }
 
     public void moveRight()
     {
         xPos -= 1f;
+        redraw = true;
     }
 }

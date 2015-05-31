@@ -7,11 +7,13 @@ public class SandpitDepthView : MonoBehaviour {
     private int width;
     private int height;
 
-    private byte[] startMap;
-    private byte[] finalMap;
-    private byte[] colourDepth;
-    public ushort[] depth;
-    public ushort[] defaultMap;
+    private byte[] startMap;    //Obsticle layout 
+    private byte[] finalMap;    //Obsticle layout that is complete and outputted
+    private byte[] colourDepth; //Coloured terrain textures
+    public ushort[] depth;      ///////DEPTH DATA FROM KINETIC//////////////////////
+    public ushort[] defaultMap; ///////DEPTH DATA FROM LOCAL SAVE(one frame)////////
+    private ushort[] standardDepth; //a set of standard depth used for calibrations
+    private bool[] maskingLayer;    //a circular masking layout that chooses what to render
 
     //The upper and lower limit in mm
     public const ushort min = 1200;
@@ -38,6 +40,7 @@ public class SandpitDepthView : MonoBehaviour {
     public int viewX = 212;
     public int viewY = 212;
 
+
 	// Use this for initialization
 	void Start () {
         this.renderer = GetComponent<Renderer>();
@@ -57,7 +60,9 @@ public class SandpitDepthView : MonoBehaviour {
 			finalMap = new byte[424 * 424]; //the obsticle map passed into the pathfinder
 			colourDepth = new byte[424 * 424 * 4];
             texture = new Texture2D(424, 424, TextureFormat.RGBA32, false);
-
+            standardDepth = new ushort[424 * 424];
+            maskingLayer = new bool[424 * 424];
+            DrawMaskingCircle();
             return;
         }
 
@@ -70,6 +75,7 @@ public class SandpitDepthView : MonoBehaviour {
         {
             depth = defaultMap;
         }
+        
         /////Updating map with Kinect/////
         //Putting kinect data into an array
         int m = 0;
@@ -113,9 +119,7 @@ public class SandpitDepthView : MonoBehaviour {
         float layerDepth = (max - min) / 4; 
         thisDepth -= min;
         float height = (float)max - (float)depth;
-        int xPos = i % 424;
-        int yPos = i / 424;
-        if (isInCircle(xPos, yPos) == true)
+        if (maskingLayer[i] == true)
         {
             if (depth > min && depth <= (min + layerDepth))
             {
@@ -224,6 +228,27 @@ public class SandpitDepthView : MonoBehaviour {
         int thing = UnityEngine.Random.Range(0, terrainQuantity);
 
         return terrainPos[thing];
+    }
+
+    public void DrawMaskingCircle()
+    {
+        //The loop which converts depth into terran colour
+        for (int i = 0; i < 423; i++)
+        {
+            for (int j = 0; j < 423; j++)
+            {
+                //Debug.Log("test");
+                if (isInCircle(j,i) == true)
+                {
+                    maskingLayer[i * 424 + (j + 1)] = true;
+                }
+                else
+                {
+                    maskingLayer[i * 424 + (j + 1)] = false;
+                }
+            }
+
+        }
     }
 
     //Takes x and y values and checks if position is inside circle of certain scale
