@@ -18,7 +18,7 @@ public class SpawnControl : MonoBehaviour {
 
     //All the data keeping track of the stuff that has spawned
     private int seaManCount = 0;
-    private int seaManMax = 25;
+    private int seaManMax = 50;
     private static bool seaManSpawn = true;
 
     private int landManCount = 0;
@@ -30,7 +30,7 @@ public class SpawnControl : MonoBehaviour {
     private static bool landPlantSpawn = true;
 
     private int seaPlantCount = 0;
-    private int seaPlantMax = 25;
+    private int seaPlantMax = 5;
     private static bool seaPlantSpawn = true;
 
     private int landKillerCount = 0;

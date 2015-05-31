@@ -12,9 +12,9 @@ public class ViewSpaceControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        viewScale = 163;
+        viewScale = 141;
         xPos = 184;
-        yPos = 163;
+        yPos = 156;
 
         spd = GetComponent<SandpitDepthView>();
 	}

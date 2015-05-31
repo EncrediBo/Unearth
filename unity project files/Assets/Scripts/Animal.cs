@@ -16,7 +16,8 @@ public abstract class Animal : MonoBehaviour
      * 2 = seaMan
      * 
      */
-    protected int type = 1;
+    protected int type = 1; //type of creature
+    protected byte terrain = 1; //terrain preference
 
     //location in game space in unity units
     protected float posX;
@@ -38,6 +39,7 @@ public abstract class Animal : MonoBehaviour
     private float timer = 0f;
 
     protected int[] heatMap;
+    protected byte[] terrainMap;
 
     protected const float pixelHeight = 0.023585f;
  
@@ -64,23 +66,16 @@ public abstract class Animal : MonoBehaviour
     {
         myStateDuration++;
 
+        //Get terrain map
+        terrainMap = pathFinder.sdv.getMap();
+
         //Choose which heat map as path finding guide
         heatMap = pathFinder.getHeatMap(type);
 
         //Applying position, just in case it is bumped
         LoadPos();
 
-        //Spawning code
-        if (heatMap[mapY * 424 + mapX] == -1)//|| heatMap[mapY * 424 + mapX] == 0)
-        {
-            //The animal is currently in a terrain that it cannot move in
-            ChangeState(State.Drowning);
-            return;
-        }
-        else if(myState == State.Drowning)
-        {
-            ChangeState(State.Idle);
-        }
+        CheckTerrain();
 
         if (heatMap[mapY * 424 + mapX] == 10000)
         {
@@ -91,12 +86,13 @@ public abstract class Animal : MonoBehaviour
         //Animal behaves according to state
         if (myState == State.Hunting)
         {
+            //Debug.Log("Hunting");
             Move(checkHeat(mapX, mapY, heatMap));
         }
         else if(myState == State.Seeking)
         {
-            Debug.Log("seeking");
-            CheckTerrain();
+            //Debug.Log("seeking");
+            CheckFront();
             Move(RandomMove());
         }
         else
@@ -105,7 +101,11 @@ public abstract class Animal : MonoBehaviour
         }
     }
 
-    protected void CheckTerrain()
+    protected virtual void CheckTerrain()
+    {
+    }
+
+    protected void CheckFront()
     {
         int x = mapX;
         int y = mapY;
@@ -114,36 +114,36 @@ public abstract class Animal : MonoBehaviour
             case Direction.NorthWest:
                 x = mapX+1;
                 y = mapY-1;
-                if(heatMap[y * 424 + x] == -1)
+                if(terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.SouthEast;
                 }
                 break;
             case Direction.North:
                 y = mapY-1;
-                if (heatMap[y * 424 + x] == -1)
+                if (terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.South;
                 }
                 break;
             case Direction.NorthEast:
-                x = mapX-1;
-                y = mapY-1;
-                if (heatMap[y * 424 + x] == -1)
+                x = mapX - 1;
+                y = mapY - 1;
+                if (terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.SouthWest;
                 }
                 break;
             case Direction.West:
                 x = mapX+1;
-                if (heatMap[y * 424 + x] == -1)
+                if (terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.East;
                 }
                 break;
             case Direction.East:
                 x= mapX-1;
-                if (heatMap[y * 424 + x] == -1)
+                if (terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.West;
                 }
@@ -151,14 +151,14 @@ public abstract class Animal : MonoBehaviour
             case Direction.SouthWest:
                 x = mapX+1;
                 y = mapY+1;
-                if (heatMap[y * 424 + x] == -1)
+                if (terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.NorthEast;
                 }
                 break;
             case Direction.South:
                 y = mapY + 1;
-                if (heatMap[y * 424 + x] == -1)
+                if (terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.North;
                 }
@@ -166,7 +166,7 @@ public abstract class Animal : MonoBehaviour
             case Direction.SouthEast:
                 x= mapX-1;
                 y= mapY+1;
-                if (heatMap[y * 424 + x] == -1)
+                if (terrainMap[y * 424 + x] != terrain)
                 {
                     facing = Direction.NorthWest;
                 }
@@ -175,14 +175,14 @@ public abstract class Animal : MonoBehaviour
                 facing = Direction.DONTMOVE;
                 break;
             default:
-                //Debug.Log("WTF invalid move!");
+                Debug.Log("WTF invalid move!");
                 break;
         }
     }
     protected void ChangeState(State state)
     {
-        Debug.Log("Changing state");
-        Debug.Log(state);
+        //Debug.Log("Changing state");
+        //Debug.Log(state);
         myStateDuration = 0;
         myState = state;
     }
@@ -213,10 +213,7 @@ public abstract class Animal : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D coll){
-
-       // print("animal got hit");
         if(coll.tag.Equals("Food")){
-            //print("nom nom nom");
             //ChangeState(State.Eating);
         } else {
            // print("Ouch");
@@ -367,7 +364,9 @@ public abstract class Animal : MonoBehaviour
 
     protected void Move(Direction dir)
     {
-        //Debug.Log(i);
+
+        //Debug.Log(mapX);
+        //Debug.Log(mapY);
         //Movement delay
         timer += Time.deltaTime;
         if (timer > delay)
@@ -383,53 +382,41 @@ public abstract class Animal : MonoBehaviour
         {
             case Direction.NorthWest:
                 facing = Direction.NorthWest;
-                mapX++;
-                mapY--;
                 transform.rotation = Quaternion.Euler(0, 0, 45);
                 transform.position += new Vector3(-pixelHeight, pixelHeight, 0f);//up left
                 break;
             case Direction.North:
                 facing = Direction.North;
-                mapY--;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 transform.position += new Vector3(0f, pixelHeight, 0f);//up
                 break;
             case Direction.NorthEast:
                 facing = Direction.NorthEast;
-                mapX--;
-                mapY--;
                 transform.rotation = Quaternion.Euler(0, 0, 315);
                 transform.position += new Vector3(pixelHeight, pixelHeight, 0f);//up right
                 break;
             case Direction.West:
                 facing = Direction.West;
-                mapX++;
                 transform.rotation = Quaternion.Euler(0, 0, 90);
                 transform.position += new Vector3(-pixelHeight, 0f, 0f);//left
                 break;
             case Direction.East:
                 facing = Direction.East;
-                mapX--;
                 transform.rotation = Quaternion.Euler(0, 0, 270);
                 transform.position += new Vector3(pixelHeight, 0f, 0f);//right
                 break;
             case Direction.SouthWest:
                 facing = Direction.SouthWest;
-                mapX++;
-                mapY++;
                 transform.rotation = Quaternion.Euler(0, 0, 135);
                 transform.position += new Vector3(-pixelHeight, -pixelHeight, 0f);//down left
                 break;
             case Direction.South:
                 facing = Direction.South;
-                mapY++;
                 transform.rotation = Quaternion.Euler(0, 0, 180);
                 transform.position += new Vector3(0f, -pixelHeight, 0f);//down
                 break;
             case Direction.SouthEast:
                 facing = Direction.SouthEast;
-                mapX--;
-                mapY++;
                 transform.rotation = Quaternion.Euler(0, 0, 225);
                 transform.position += new Vector3(pixelHeight, -pixelHeight, 0f);//down right
                 break;
@@ -448,16 +435,19 @@ public abstract class Animal : MonoBehaviour
         //If the facing is not set yet, go random direction
         if (facing == Direction.DONTMOVE){
             int randomDir= Random.Range(1, 8);
+            //Debug.Log(facing);
             return NumToDir(randomDir);
         }
 
         int rnd = Random.Range(1, 408);
         if (rnd > 400){
+            //Debug.Log("random go");
             //Debug.Log("going wiht me guts");
             return NumToDir(rnd - 400);
         }
         else
         {
+           //Debug.Log(facing);
            // Debug.Log("keep going");
             return facing;
         }
@@ -491,7 +481,7 @@ public abstract class Animal : MonoBehaviour
     protected virtual void Kill()
     {
         //Talk to spawn
-        Debug.Log(type);
+        //Debug.Log(type);
         spawnControl.Spawn(-type);
         Destroy(this.gameObject);
     }

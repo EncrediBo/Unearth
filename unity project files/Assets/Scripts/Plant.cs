@@ -25,6 +25,7 @@ public abstract class Plant : MonoBehaviour {
 
     //Age of the plant
     private int life = 0;
+    private int lifeSpan;
 
     //Map of terrain
 
@@ -33,6 +34,9 @@ public abstract class Plant : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
+        //Generate a random life span
+        lifeSpan = Random.Range(3000, 4000);
+
 	    //Load the position and map position
         LoadPos();
 
@@ -52,7 +56,7 @@ public abstract class Plant : MonoBehaviour {
 
         life++;
 
-        if (life > 3000)
+        if (life > lifeSpan)
         {
             Kill();
         }
@@ -73,7 +77,7 @@ public abstract class Plant : MonoBehaviour {
     protected void OnTriggerEnter2D(Collider2D coll)
     {
        // print("plant got hit");
-        Kill();
+        //Kill();
     }
 
     protected virtual void Kill()

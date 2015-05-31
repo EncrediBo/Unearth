@@ -8,6 +8,7 @@ public class SeaManControl : Animal
     protected override void Start()
     {
         type = 2;
+        terrain = 1;
         base.Start();
     }
     // Use this for initialization
@@ -15,9 +16,20 @@ public class SeaManControl : Animal
     {
         if (myStateDuration >= 90)
         {
-            ChangeState(State.Hunting);
+            ChangeState(State.Seeking);
         }
 
+
         base.Update();
+    }
+
+    protected override void CheckTerrain()
+    {
+        //Spawning code
+        if (terrainMap[mapY * 424 + mapX] != 1)//|| heatMap[mapY * 424 + mapX] == 0)
+        {
+            //The animal is currently in a terrain that it cannot move in
+            ChangeState(State.Drowning);
+        }
     }
 }

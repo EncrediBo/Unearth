@@ -9,6 +9,7 @@ public class LandManControl : Animal
     protected override void Start()
     {
         type = 1;
+        terrain = 3;
         base.Start();
     }
     protected override void Update()
@@ -17,6 +18,9 @@ public class LandManControl : Animal
         {
             ChangeState(State.Hunting);
         }
+
+        //Get terrain map
+        terrainMap = pathFinder.sdv.getMap();
 
         base.Update();
     }
