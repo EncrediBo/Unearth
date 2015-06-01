@@ -1,0 +1,253 @@
+fileFormatVersion: 2
+guid: a8c4e6fe891edc64f98eb5383d8a19ed
+timeCreated: 1433182367
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Lava opening_0
+    21300002: Lava opening_1
+    21300004: Lava opening_2
+    21300006: Lava opening_3
+    21300008: Lava opening_4
+    21300010: Lava opening_5
+    21300012: Lava opening_6
+    21300014: Lava opening_7
+    21300016: Lava opening_8
+    21300018: Lava opening_9
+    21300020: Lava opening_10
+    21300022: Lava opening_11
+    21300024: Lava opening_12
+    21300026: Lava opening_13
+    21300028: Lava opening_14
+    21300030: Lava opening_15
+    21300032: Lava opening_16
+    21300034: Lava opening_17
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Lava opening_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 16
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 16
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_2
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 15
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_3
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 15
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_4
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 14
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 13
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_6
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 12
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_7
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 11
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_8
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 10
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_9
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 10
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_10
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 8
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_11
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 5
+        width: 27
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_12
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 4
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_13
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 1
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_14
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 1
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_15
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 1
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_16
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 1
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lava opening_17
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

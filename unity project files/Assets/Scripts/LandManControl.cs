@@ -130,7 +130,7 @@ public class LandManControl : Animal
             ChangeState(State.Drowning);
             // change the animator here to the idle animation
             //Debug.Log("state should be seeking but is: " + myState);
-            base.animator.SetBool("drowning", false);
+            base.animator.SetBool("drowning", true);
         }
     }
 

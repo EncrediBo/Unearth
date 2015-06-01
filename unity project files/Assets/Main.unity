@@ -898,6 +898,7 @@ MonoBehaviour:
   landMan:
   - {fileID: 177520, guid: e88c4b3d8a7fef64ab2f90f0f0fdb3e9, type: 2}
   - {fileID: 110026, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
+  - {fileID: 132400, guid: fac614c45241410499d7e5648eb40c08, type: 2}
   sdv: {fileID: 291463358}
   landPlants:
   - {fileID: 171832, guid: bbb95b00e17109b48b32a98bc3264e1e, type: 2}
@@ -916,6 +917,7 @@ MonoBehaviour:
   - {fileID: 186306, guid: 3991a0378b7d2654697b875dad8cd1cc, type: 2}
   - {fileID: 177290, guid: dde3f8eac412b904085cc8ab896711b0, type: 2}
   - {fileID: 194480, guid: c2ef7bcc804ae1e4b96f67ce7a4d197a, type: 2}
+  volcano: {fileID: 122318, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
 --- !u!4 &276978490
 Transform:
   m_ObjectHideFlags: 0
