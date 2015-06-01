@@ -14,6 +14,7 @@ public class SandpitDepthView : MonoBehaviour {
     public ushort[] defaultMap; ///////DEPTH DATA FROM LOCAL SAVE(one frame)////////
     private ushort[] standardDepth; //a set of standard depth used for calibrations
     private bool[] maskingLayer;    //a circular masking layout that chooses what to render
+	private int[] sliced;
 
 	private int lavaX;
 	private int lavaY;
@@ -44,6 +45,7 @@ public class SandpitDepthView : MonoBehaviour {
     public int viewScale = 212;
     public int viewX = 212;
     public int viewY = 212;
+	public int maxHeight = 0;
 	private int count = 10000;
 	private bool lavaTime = true;
 
@@ -66,6 +68,7 @@ public class SandpitDepthView : MonoBehaviour {
 			startMap = new byte[424 * 424]; //the map that constantly gets changed on frame update
 			finalMap = new byte[424 * 424]; //the obsticle map passed into the pathfinder
 			lavaHeatMap = new int[424 * 424];
+			sliced = new int[424 * 424];
 			colourDepth = new byte[424 * 424 * 4];
             texture = new Texture2D(424, 424, TextureFormat.RGBA32, false);
             standardDepth = new ushort[424 * 424];
@@ -103,6 +106,7 @@ public class SandpitDepthView : MonoBehaviour {
                     else
                     {
                         Mapcolour(depth[k], m);
+						sliced[m] = k;
                         m++;
                     }
                 }           
@@ -121,6 +125,15 @@ public class SandpitDepthView : MonoBehaviour {
 		lavaHeatMap = pf.getHeatMap(3);
 		count--;
 
+		//getting value of highest point of sand
+		for (int i=0; i<(424*424); i++) {
+			if (sliced[i] > max){
+				maxHeight = sliced[i];
+			}
+			
+		}
+		//Debug.Log (maxHeight);
+
 	}
 
     private void Mapcolour(ushort depth, int i)
@@ -133,7 +146,7 @@ public class SandpitDepthView : MonoBehaviour {
         if (maskingLayer[i] == true) {
 
 
-			/*if (lavaHeatMap[i] >= count){
+			if (lavaHeatMap[i] >= count && depth > maxHeight && depth < (10000-count)){
 				colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					colourDepth[i * 4 + 3] = 250;						
@@ -141,9 +154,9 @@ public class SandpitDepthView : MonoBehaviour {
 				if (count <8000) {
 					lavaTime = false;
 				}
-			} */
+			} 
 
-            /*else*/ if (depth > min && depth <= (min + layerDepth))
+            else if (depth > min && depth <= (min + layerDepth))
             {
                 //Volcano
                 colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
@@ -298,5 +311,4 @@ public class SandpitDepthView : MonoBehaviour {
         }
     }
 
-   
 }
