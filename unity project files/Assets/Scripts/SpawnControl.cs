@@ -7,8 +7,8 @@ public class SpawnControl : MonoBehaviour {
     private byte[] finalMap;
 
     //Prefabs of all the creatures/plants that can be spawned
-    public GameObject seaMan;
-    public GameObject landMan;
+    public GameObject[] seaMan;
+    public GameObject[] landMan;
 
     public SandpitDepthView sdv;
 
@@ -18,11 +18,11 @@ public class SpawnControl : MonoBehaviour {
 
     //All the data keeping track of the stuff that has spawned
     private int seaManCount = 0;
-    private int seaManMax = 50;
+    private int seaManMax = 5;
     private static bool seaManSpawn = true;
 
     private int landManCount = 0;
-    private int landManMax = 5;
+    private int landManMax = 3;
     private static bool landManSpawn = true;
 
     private int landPlantCount = 0;
@@ -85,7 +85,7 @@ public class SpawnControl : MonoBehaviour {
 
             //Debug.Log(landManCount);
             //Debug.Log(landManMax);
-            Instantiate(landMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            Instantiate(landMan[Random.Range(0, landMan.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
             landManCount++;
             //seaManSpawn = false;
         }
@@ -102,7 +102,7 @@ public class SpawnControl : MonoBehaviour {
 
             //Debug.Log(seaManCount);
             //Debug.Log(seaManMax);
-            Instantiate(seaMan, new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            Instantiate(seaMan[Random.Range(0, seaMan.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
             seaManCount++;
             //seaManSpawn = false;
         }

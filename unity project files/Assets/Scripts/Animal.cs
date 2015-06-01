@@ -28,7 +28,8 @@ public abstract class Animal : MonoBehaviour
     protected int mapY;
 
     //Direction of this sprite is facing
-    private Direction facing;
+    protected Direction facing;
+    protected bool turning = false;
 
     protected State myState = State.Idle;
     protected int myStateDuration = 0;
@@ -105,69 +106,77 @@ public abstract class Animal : MonoBehaviour
     {
     }
 
-    protected void CheckFront()
+    protected virtual void CheckFront()
     {
         int x = mapX;
         int y = mapY;
         switch (facing)
         {
             case Direction.NorthWest:
-                x = mapX+1;
-                y = mapY-1;
+                x = mapX+2;
+                y = mapY-2;
                 if(terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.SouthEast;
                 }
                 break;
             case Direction.North:
-                y = mapY-1;
+                y = mapY-2;
                 if (terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.South;
                 }
                 break;
             case Direction.NorthEast:
-                x = mapX - 1;
-                y = mapY - 1;
+                x = mapX - 2;
+                y = mapY - 2;
                 if (terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.SouthWest;
                 }
                 break;
             case Direction.West:
-                x = mapX+1;
+                x = mapX+2;
                 if (terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.East;
                 }
                 break;
             case Direction.East:
-                x= mapX-1;
+                x= mapX-2;
                 if (terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.West;
                 }
                 break;
             case Direction.SouthWest:
-                x = mapX+1;
-                y = mapY+1;
+                x = mapX+2;
+                y = mapY+2;
                 if (terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.NorthEast;
                 }
                 break;
             case Direction.South:
-                y = mapY + 1;
+                y = mapY + 2;
                 if (terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.North;
                 }
                 break;
             case Direction.SouthEast:
-                x= mapX-1;
-                y= mapY+1;
+                x= mapX-2;
+                y= mapY+2;
                 if (terrainMap[y * 424 + x] != terrain)
                 {
+                    turning = true;
                     facing = Direction.NorthWest;
                 }
                 break;
@@ -439,11 +448,18 @@ public abstract class Animal : MonoBehaviour
             return NumToDir(randomDir);
         }
 
-        int rnd = Random.Range(1, 408);
-        if (rnd > 400){
+        //When the change direction was just triggered, don't 
+        if (turning == true)
+        {
+            turning = false;
+            return facing;
+        }
+
+        int rnd = Random.Range(1, 208);
+        if (rnd > 200){
             //Debug.Log("random go");
             //Debug.Log("going wiht me guts");
-            return NumToDir(rnd - 400);
+            return NumToDir(rnd - 200);
         }
         else
         {
@@ -501,11 +517,13 @@ public abstract class Animal : MonoBehaviour
     //Public functions that allow the animal to interact with other elements
     public int getLocationX()
     {
+        LoadPos();
         return mapX;
     }
 
     public int getLocationY()
     {
+        LoadPos();
         return mapY;
     }
 }

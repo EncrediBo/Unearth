@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: cdfece05c22c065429286caea47ffc2a
-timeCreated: 1432684497
+guid: 134fa6f760ba7024194e8f20613e6c09
+timeCreated: 1433124244
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Turtle (white)_0
-    21300002: Turtle (white)_1
-    21300004: Turtle (white)_2
-    21300006: Turtle (white)_3
-    21300008: Turtle (white)_4
-    21300010: Turtle (white)_5
-    21300012: Turtle (white)_6
-    21300014: Turtle (white)_7
+    21300000: frog_white_0
+    21300002: frog_white_1
+    21300004: frog_white_2
+    21300006: frog_white_3
+    21300008: frog_white_4
+    21300010: frog_white_5
+    21300012: frog_white_6
+    21300014: frog_white_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,89 +51,89 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Turtle (white)_0
+    - name: frog_white_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Turtle (white)_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Turtle (white)_2
+    - name: frog_white_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Turtle (white)_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Turtle (white)_4
+    - name: frog_white_2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Turtle (white)_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Turtle (white)_6
+    - name: frog_white_3
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Turtle (white)_7
+    - name: frog_white_4
       rect:
         serializedVersion: 2
-        x: 224
+        x: 256
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

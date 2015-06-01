@@ -891,8 +891,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5781258db8a2860488895a41eb4bdb90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seaMan: {fileID: 138988, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
-  landMan: {fileID: 110026, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
+  seaMan:
+  - {fileID: 138988, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+  - {fileID: 175604, guid: 99fa83152ad465745b28579d57fad48c, type: 2}
+  - {fileID: 111374, guid: 1845ff73b11b9f24795bfd2a6db73b72, type: 2}
+  landMan:
+  - {fileID: 177520, guid: e88c4b3d8a7fef64ab2f90f0f0fdb3e9, type: 2}
+  - {fileID: 110026, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
   sdv: {fileID: 291463358}
   landPlants:
   - {fileID: 171832, guid: bbb95b00e17109b48b32a98bc3264e1e, type: 2}
@@ -919,7 +924,7 @@ Transform:
   m_GameObject: {fileID: 276978488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.36793005, y: -1.36793005, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .25, y: .25, z: 1}
   m_Children: []
   m_Father: {fileID: 924255815}
   m_RootOrder: 1
