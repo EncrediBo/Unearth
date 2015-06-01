@@ -110,7 +110,7 @@ public abstract class Animal : MonoBehaviour
     {
     }
 
-    protected virtual void CheckFront()
+    protected virtual bool CheckFront()
     {
         int x = mapX;
         int y = mapY;
@@ -123,6 +123,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.SouthEast;
+                    return false;
                 }
                 break;
             case Direction.North:
@@ -131,6 +132,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.South;
+                    return false;
                 }
                 break;
             case Direction.NorthEast:
@@ -140,6 +142,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.SouthWest;
+                    return false;
                 }
                 break;
             case Direction.West:
@@ -148,6 +151,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.East;
+                    return false;
                 }
                 break;
             case Direction.East:
@@ -156,6 +160,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.West;
+                    return false;
                 }
                 break;
             case Direction.SouthWest:
@@ -165,6 +170,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.NorthEast;
+                    return false;
                 }
                 break;
             case Direction.South:
@@ -173,6 +179,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.North;
+                    return false;
                 }
                 break;
             case Direction.SouthEast:
@@ -182,6 +189,7 @@ public abstract class Animal : MonoBehaviour
                 {
                     turning = true;
                     facing = Direction.NorthWest;
+                    return false;
                 }
                 break;
             case Direction.DONTMOVE:
@@ -191,6 +199,7 @@ public abstract class Animal : MonoBehaviour
                 Debug.Log("WTF invalid move!");
                 break;
         }
+        return true;
     }
     protected void ChangeState(State state)
     {
@@ -391,6 +400,14 @@ public abstract class Animal : MonoBehaviour
             return;
         }
 
+        if (turning == true)
+        {
+            if (CheckFront() == false)
+            {
+                return;
+            }
+        }
+
         switch (dir)
         {
             case Direction.NorthWest:
@@ -463,6 +480,7 @@ public abstract class Animal : MonoBehaviour
         if (rnd > 200){
             //Debug.Log("random go");
             //Debug.Log("going wiht me guts");
+            turning = true;
             return NumToDir(rnd - 200);
         }
         else

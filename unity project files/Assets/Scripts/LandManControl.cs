@@ -14,7 +14,8 @@ public class LandManControl : Animal
     }
     protected override void Update()
     {
-        if (myStateDuration >= 90)
+        //If this have not been move for more than 90 frames start seeking
+        if ( myState != State.Seeking)
         {
             ChangeState(State.Seeking);
         }
@@ -25,7 +26,7 @@ public class LandManControl : Animal
         base.Update();
     }
 
-    protected override void CheckFront()
+    protected override bool CheckFront()
     {
         int x = mapX;
         int y = mapY;
@@ -38,6 +39,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.SouthEast;
+                    return false;
                 }
                 break;
             case Direction.North:
@@ -46,6 +48,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.South;
+                    return false;
                 }
                 break;
             case Direction.NorthEast:
@@ -55,6 +58,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.SouthWest;
+                    return false;
                 }
                 break;
             case Direction.West:
@@ -63,6 +67,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.East;
+                    return false;
                 }
                 break;
             case Direction.East:
@@ -71,6 +76,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.West;
+                    return false;
                 }
                 break;
             case Direction.SouthWest:
@@ -80,6 +86,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.NorthEast;
+                    return false;
                 }
                 break;
             case Direction.South:
@@ -88,6 +95,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.North;
+                    return false;
                 }
                 break;
             case Direction.SouthEast:
@@ -97,6 +105,7 @@ public class LandManControl : Animal
                 {
                     turning = true;
                     facing = Direction.NorthWest;
+                    return false;
                 }
                 break;
             case Direction.DONTMOVE:
@@ -106,6 +115,7 @@ public class LandManControl : Animal
                 Debug.Log("WTF invalid move!");
                 break;
         }
+        return true;
     }
 
     protected override void CheckTerrain()
