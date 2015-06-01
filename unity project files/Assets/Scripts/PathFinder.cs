@@ -64,6 +64,7 @@ public class PathFinder : MonoBehaviour {
         timer += Time.deltaTime;
         if (timer > delay)
         {
+            //Debug.Log("tick");
             timer = 0f;
         }
         else

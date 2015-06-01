@@ -16,7 +16,7 @@ public class Tree : Plant{
         if (pathFinder.getTerrain(mapX, mapY) == 1)
         {
             //If i am in water, i die
-            Kill();
+            base.Kill();
         }
         base.Update();
     }
