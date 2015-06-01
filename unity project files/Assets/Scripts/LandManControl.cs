@@ -18,6 +18,9 @@ public class LandManControl : Animal
         if ( myState != State.Seeking)
         {
             ChangeState(State.Seeking);
+            // change the animator here to the idle animation
+            //Debug.Log("state should be seeking but is: " + myState);
+            base.animator.SetBool("drowning", false);
         }
 
         //Get terrain map
@@ -125,6 +128,9 @@ public class LandManControl : Animal
         {
             //The animal is currently in a terrain that it cannot move in
             ChangeState(State.Drowning);
+            // change the animator here to the idle animation
+            //Debug.Log("state should be seeking but is: " + myState);
+            base.animator.SetBool("drowning", false);
         }
     }
 

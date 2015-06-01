@@ -22,7 +22,7 @@ public class SpawnControl : MonoBehaviour {
     private static bool seaManSpawn = true;
 
     private int landManCount = 0;
-    private int landManMax = 55;
+    private int landManMax = 15;
     private static bool landManSpawn = true;
 
     private int landPlantCount = 0;
@@ -40,6 +40,9 @@ public class SpawnControl : MonoBehaviour {
     private int seaKillerCount = 0;
     private int seaKillerMax = 1;
     private static bool seaKillerSpawn = true;
+
+    //Volcano
+    private static bool volcanoSpawn = true;
 
     protected const float pixelHeight = 0.023585f;
 
