@@ -32,8 +32,8 @@ public abstract class Plant : MonoBehaviour {
 	private int scaleFrames = 100;
 
 	//counter for death animation
-	private int scaleDownCount = 0;
-	private int scaleDownFrames = 50;
+	protected int scaleDownCount = 0;
+	protected int scaleDownFrames = 65;
 
     //Map of terrain
 
@@ -64,30 +64,33 @@ public abstract class Plant : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	protected virtual void Update () {
+    protected virtual void Update()
+    {
 
         life++;
 
         if (life > lifeSpan)
         {
-			//decrease size animation
-			if(scaleDownCount <= scaleDownFrames)
-			{
-				transform.localScale -= new Vector3(0.02F, 0.02F, 0);
-				scaleDownCount++;
-				return;
-			}
-            Kill();
+            //decrease size animation
+            /*if (scaleDownCount <= scaleDownFrames)
+            {
+                transform.localScale -= new Vector3(0.005f, 0.005f, 0);
+                scaleDownCount++;
+                return;
+            } */
+            Kill(); 
         }
-	    //This needs to check the land condition to consider if it is dead or not
+            //This needs to check the land condition to consider if it is dead or not
 
-		//spawning animation
-		if (scaleCount <= scaleFrames) 
-		{
-			transform.localScale += new Vector3(0.01F, 0.01F, 0);
-			scaleCount++;
-		}
-	}
+        //spawning animation
+        if (scaleCount <= scaleFrames)
+        {
+            transform.localScale += new Vector3(0.01F, 0.01F, 0);
+            scaleCount++;
+        }
+    
+    }
+
 
     protected void LoadPos()
     {
@@ -109,6 +112,12 @@ public abstract class Plant : MonoBehaviour {
     protected virtual void Kill()
     {
         //Talk to spawn
+        if (scaleDownCount <= scaleDownFrames)
+        {
+            transform.localScale -= new Vector3(0.005f, 0.005f, 0);
+            scaleDownCount++;
+            return;
+        }
         spawnControl.Spawn(-type);
         Destroy(this.gameObject);
         life = 0;

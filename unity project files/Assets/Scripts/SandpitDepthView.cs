@@ -133,7 +133,7 @@ public class SandpitDepthView : MonoBehaviour {
         if (maskingLayer[i] == true) {
 
 
-			if (lavaHeatMap[i] >= count){
+			/*if (lavaHeatMap[i] >= count){
 				colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					colourDepth[i * 4 + 3] = 250;						
@@ -141,9 +141,9 @@ public class SandpitDepthView : MonoBehaviour {
 				if (count <8000) {
 					lavaTime = false;
 				}
-			}
+			} */
 
-            else if (depth > min && depth <= (min + layerDepth))
+            /*else*/ if (depth > min && depth <= (min + layerDepth))
             {
                 //Volcano
                 colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
