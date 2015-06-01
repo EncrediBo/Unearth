@@ -27,6 +27,14 @@ public abstract class Plant : MonoBehaviour {
     private int life = 0;
     private int lifeSpan;
 
+	//counter for spawn animation
+	private int scaleCount = 0;
+	private int scaleFrames = 100;
+
+	//counter for death animation
+	private int scaleDownCount = 0;
+	private int scaleDownFrames = 50;
+
     //Map of terrain
 
 
@@ -49,6 +57,10 @@ public abstract class Plant : MonoBehaviour {
         {
             pathFinder = PathFinder.Instance();
         }
+
+		//set initial scale to zero
+		Vector3 scale = new Vector3( 0, 0, 1f );
+		//transform.localScale = scale;
 	}
 	
 	// Update is called once per frame
@@ -58,9 +70,23 @@ public abstract class Plant : MonoBehaviour {
 
         if (life > lifeSpan)
         {
+			//decrease size animation
+			if(scaleDownCount <= scaleDownFrames)
+			{
+				transform.localScale -= new Vector3(0.02F, 0.02F, 0);
+				scaleDownCount++;
+				return;
+			}
             Kill();
         }
 	    //This needs to check the land condition to consider if it is dead or not
+
+		//spawning animation
+		if (scaleCount <= scaleFrames) 
+		{
+			transform.localScale += new Vector3(0.01F, 0.01F, 0);
+			scaleCount++;
+		}
 	}
 
     protected void LoadPos()
