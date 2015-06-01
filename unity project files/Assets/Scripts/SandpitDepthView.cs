@@ -16,7 +16,7 @@ public class SandpitDepthView : MonoBehaviour {
     private bool[] maskingLayer;    //a circular masking layout that chooses what to render
 
     //The upper and lower limit in mm
-    public const ushort min = 1200;
+    public const ushort min = 1170;
     public const ushort max = 1320;
 
     private Texture2D texture;
@@ -116,26 +116,35 @@ public class SandpitDepthView : MonoBehaviour {
     {
         //Distance between min and depth
         ushort thisDepth = depth;
-        float layerDepth = (max - min) / 4; 
+        float layerDepth = (max - min) / 5; 
         thisDepth -= min;
         float height = (float)max - (float)depth;
         if (maskingLayer[i] == true)
         {
             if (depth > min && depth <= (min + layerDepth))
             {
-                //If the depth is above the boundary, snowy peaks
-                colourDepth[i * 4 + 0] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
-                colourDepth[i * 4 + 1] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
-                colourDepth[i * 4 + 2] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
-                colourDepth[i * 4 + 3] = 255;
+                //Volcano
+                colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+                colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+                colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+                colourDepth[i * 4 + 3] = 250;
                 startMap[i] = 5;
             }
+			else if (depth > (min + layerDepth) && depth < (min + layerDepth*2))
+			{
+				//If the depth is above the boundary, snowy peaks
+				colourDepth[i * 4 + 0] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+				colourDepth[i * 4 + 1] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+				colourDepth[i * 4 + 2] = 255;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+				colourDepth[i * 4 + 3] = 255;
+				startMap[i] = 5;
+			}
             else if (depth < (max - layerDepth * 2) && depth > (max - layerDepth * 3))
             {
                 //Barren mountain ranges
-                colourDepth[i * 4 + 0] = (byte)150;
-                colourDepth[i * 4 + 1] = (byte)150;
-                colourDepth[i * 4 + 2] = 150;
+                colourDepth[i * 4 + 0] = 150;
+                colourDepth[i * 4 + 1] = 72;
+                colourDepth[i * 4 + 2] = 0;
                 colourDepth[i * 4 + 3] = 255;
                 startMap[i] = 4;
             }
