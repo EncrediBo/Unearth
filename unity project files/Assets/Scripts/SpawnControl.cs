@@ -22,7 +22,7 @@ public class SpawnControl : MonoBehaviour {
     private static bool seaManSpawn = true;
 
     private int landManCount = 0;
-    private int landManMax = 3;
+    private int landManMax = 55;
     private static bool landManSpawn = true;
 
     private int landPlantCount = 0;

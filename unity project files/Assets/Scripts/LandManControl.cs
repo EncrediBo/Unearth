@@ -108,4 +108,14 @@ public class LandManControl : Animal
         }
     }
 
+    protected override void CheckTerrain()
+    {
+        //Spawning code
+        if (terrainMap[mapY * 424 + mapX] != 2 && terrainMap[mapY * 424 + mapX] != 3)//|| heatMap[mapY * 424 + mapX] == 0)
+        {
+            //The animal is currently in a terrain that it cannot move in
+            ChangeState(State.Drowning);
+        }
+    }
+
 }
