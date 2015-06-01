@@ -14,11 +14,14 @@ public class SeaManControl : Animal
     // Use this for initialization
     protected override void Update()
     {
-        if (myStateDuration >= 90)
+        
+        //If this have not been move for more than 90 frames start seeking
+        if (myState != State.Seeking)
         {
             ChangeState(State.Seeking);
 			// change the animator here to the idle animation
-			base.animator.SetTrigger("idle");
+            //Debug.Log("state should be seeking but is: " + myState);
+			base.animator.SetBool("drowning", false);
         }
 
 
@@ -32,9 +35,9 @@ public class SeaManControl : Animal
         {
             //The animal is currently in a terrain that it cannot move in
             ChangeState(State.Drowning);
-
+            //Debug.Log("State should be drowning but is: " + myState);
 			//change the animator here to drowning animation
-			base.animator.SetTrigger("drowning");
+            base.animator.SetBool("drowning", true);
         }
     }
 }
