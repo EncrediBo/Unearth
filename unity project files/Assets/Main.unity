@@ -971,6 +971,7 @@ MonoBehaviour:
   viewScale: 212
   viewX: 212
   viewY: 212
+  maxHeight: 0
 --- !u!23 &291463359
 MeshRenderer:
   m_ObjectHideFlags: 0
