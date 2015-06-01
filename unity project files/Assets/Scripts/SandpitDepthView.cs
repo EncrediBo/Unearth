@@ -128,7 +128,7 @@ public class SandpitDepthView : MonoBehaviour {
                 colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
                 colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
                 colourDepth[i * 4 + 3] = 250;
-                startMap[i] = 5;
+                startMap[i] = 6;
             }
 			else if (depth > (min + layerDepth) && depth < (min + layerDepth*2))
 			{

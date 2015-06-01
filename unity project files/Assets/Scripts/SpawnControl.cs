@@ -15,6 +15,7 @@ public class SpawnControl : MonoBehaviour {
     //Prefabs for plants
     public GameObject[] landPlants;  //Array of tree prefabs.
     public GameObject[] seaPlants;	//Array of sea plants prefabs
+    public GameObject volcano;
 
     //All the data keeping track of the stuff that has spawned
     private int seaManCount = 0;
@@ -143,8 +144,23 @@ public class SpawnControl : MonoBehaviour {
             seaPlantCount++;
             //seaManSpawn = false;
         }
-       
 
+        if (volcanoSpawn == true)
+        {
+            int spawnLoc = sdv.getRandomSpawnLocation(6); //get spawn location in ushort
+            //convert to x and y values
+            int x = spawnLoc % 424;
+            int y = spawnLoc / 424;
+            //convert to canvas values
+            float mapX = (212 - x) * pixelHeight;
+            float mapY = (212 - y) * pixelHeight;
+
+            //Debug.Log(seaManCount);
+            //Debug.Log(seaManMax);
+            Instantiate(volcano, new Vector3(mapX, mapY, 0f), Quaternion.identity);
+            volcanoSpawn = false;
+            //seaManSpawn = false;
+        }
         //Instantiate(seaMan);
 	}
 
