@@ -16,6 +16,7 @@ public class PathFinder : MonoBehaviour {
     private static byte[] finalMap;
     private int[] heatMap1;
     private int[] heatMap2;
+	private int[] heatMap3;
     private int[] heatMapLandPlant;
 
     //Destination coordinates
@@ -43,7 +44,8 @@ public class PathFinder : MonoBehaviour {
 	void Start () {
         heatMap1 = new int[424*424];
         heatMap2 = new int[424*424];
-        for (int i = 0; i < heatMap1.Length; i++)
+		heatMap3 = new int[424*424];
+		for (int i = 0; i < heatMap1.Length; i++)
         {
             heatMap1[i] = -1;
             heatMap2[i] = -1;

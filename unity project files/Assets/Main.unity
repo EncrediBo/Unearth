@@ -962,6 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   depth: 
   defaultMap: 
+  pf: {fileID: 2132926841}
   paintMe: {fileID: 291463357}
   dsm: {fileID: 1528692207}
   atf: {fileID: 261003290}
@@ -1060,7 +1061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &335073844
 Transform:
   m_ObjectHideFlags: 0

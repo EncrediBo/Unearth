@@ -15,6 +15,11 @@ public class SandpitDepthView : MonoBehaviour {
     private ushort[] standardDepth; //a set of standard depth used for calibrations
     private bool[] maskingLayer;    //a circular masking layout that chooses what to render
 
+	private int lavaX;
+	private int lavaY;
+	private int[] lavaHeatMap;
+	public PathFinder pf;
+
     //The upper and lower limit in mm
     public const ushort min = 1170;
     public const ushort max = 1320;
@@ -39,6 +44,8 @@ public class SandpitDepthView : MonoBehaviour {
     public int viewScale = 212;
     public int viewX = 212;
     public int viewY = 212;
+	private int count = 10000;
+	private bool lavaTime = true;
 
 
 	// Use this for initialization
@@ -58,6 +65,7 @@ public class SandpitDepthView : MonoBehaviour {
             //initializing all the lists
 			startMap = new byte[424 * 424]; //the map that constantly gets changed on frame update
 			finalMap = new byte[424 * 424]; //the obsticle map passed into the pathfinder
+			lavaHeatMap = new int[424 * 424];
 			colourDepth = new byte[424 * 424 * 4];
             texture = new Texture2D(424, 424, TextureFormat.RGBA32, false);
             standardDepth = new ushort[424 * 424];
@@ -110,6 +118,9 @@ public class SandpitDepthView : MonoBehaviour {
 
         finalMap = startMap;
 
+		lavaHeatMap = pf.getHeatMap(3);
+		count--;
+
 	}
 
     private void Mapcolour(ushort depth, int i)
@@ -119,16 +130,27 @@ public class SandpitDepthView : MonoBehaviour {
         float layerDepth = (max - min) / 5; 
         thisDepth -= min;
         float height = (float)max - (float)depth;
-        if (maskingLayer[i] == true)
-        {
-            if (depth > min && depth <= (min + layerDepth))
+        if (maskingLayer[i] == true) {
+
+
+			if (lavaHeatMap[i] >= count){
+				colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					colourDepth[i * 4 + 3] = 250;						
+				startMap[i] = 6;
+				if (count <8000) {
+					lavaTime = false;
+				}
+			}
+
+            else if (depth > min && depth <= (min + layerDepth))
             {
                 //Volcano
                 colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
                 colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
                 colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
                 colourDepth[i * 4 + 3] = 250;
-                startMap[i] = 5;
+                startMap[i] = 6;
             }
 			else if (depth > (min + layerDepth) && depth < (min + layerDepth*2))
 			{
@@ -203,6 +225,10 @@ public class SandpitDepthView : MonoBehaviour {
     public byte[] getMap(){
         return finalMap;
     }
+
+	public void lavaOn(){
+		lavaTime = true;
+	}
 
     //Control button functions
     public void toggleKineticOn()
