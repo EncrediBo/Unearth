@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System;
+using System.IO;
+using System.Linq;
 
 public class SandpitDepthView : MonoBehaviour {
 
@@ -15,6 +21,9 @@ public class SandpitDepthView : MonoBehaviour {
     private ushort[] standardDepth; //a set of standard depth used for calibrations
     private bool[] maskingLayer;    //a circular masking layout that chooses what to render
 	private int[] sliced;
+
+	private float delay = 0.1f; //Every two seconds
+	private float timer = 0f;
 
 	private int lavaX;
 	private int lavaY;
@@ -58,6 +67,12 @@ public class SandpitDepthView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		timer += Time.deltaTime;
+		if (timer > delay) {
+			Debug.Log (count);
+			count--;
+			timer = 0;
+		}
         if (once)
         {
             //Debug.Log(dsm.Width);
@@ -123,7 +138,7 @@ public class SandpitDepthView : MonoBehaviour {
         finalMap = startMap;
 
 		lavaHeatMap = pf.getHeatMap(3);
-		count--;
+	
 
 		//getting value of highest point of sand
 		for (int i=0; i<(424*424); i++) {
@@ -132,7 +147,6 @@ public class SandpitDepthView : MonoBehaviour {
 			}
 			
 		}
-		//Debug.Log (maxHeight);
 
 	}
 
@@ -145,7 +159,7 @@ public class SandpitDepthView : MonoBehaviour {
         float height = (float)max - (float)depth;
         if (maskingLayer[i] == true) {
 
-			if (lavaHeatMap[i] >= count && depth > maxHeight && depth < (10000-count)){
+			if (lavaHeatMap[i] >= (count-25) && depth > min && depth < (min +10000-count)){
 				colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					colourDepth[i * 4 + 3] = 250;						
