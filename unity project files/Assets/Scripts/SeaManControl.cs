@@ -17,6 +17,8 @@ public class SeaManControl : Animal
         if (myStateDuration >= 90)
         {
             ChangeState(State.Seeking);
+			// change the animator here to the idle animation
+			base.animator.SetTrigger("idle");
         }
 
 
@@ -30,6 +32,9 @@ public class SeaManControl : Animal
         {
             //The animal is currently in a terrain that it cannot move in
             ChangeState(State.Drowning);
+
+			//change the animator here to drowning animation
+			base.animator.SetTrigger("drowning");
         }
     }
 }

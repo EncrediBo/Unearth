@@ -7,6 +7,7 @@ public abstract class Animal : MonoBehaviour
 
     public PathFinder pathFinder;
     public SpawnControl spawnControl;
+	protected Animator animator;
 
     //public static int count = 1;
 
@@ -49,6 +50,9 @@ public abstract class Animal : MonoBehaviour
     {
         //Load the position and map position
         LoadPos();
+
+		//Set the animator
+		animator = GetComponent<Animator> ();
 
         if (pathFinder == null)
         {
