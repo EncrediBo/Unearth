@@ -20,14 +20,19 @@ public class SandpitDepthView : MonoBehaviour {
     public ushort[] defaultMap; ///////DEPTH DATA FROM LOCAL SAVE(one frame)////////
     private ushort[] standardDepth; //a set of standard depth used for calibrations
     private bool[] maskingLayer;    //a circular masking layout that chooses what to render
-	private int[] sliced;
+    private bool[] lavaMap; //a masking layer for the lava
 
 	private float delay = 0.1f; //Every two seconds
 	private float timer = 0f;
 
-	private int lavaX;
-	private int lavaY;
+    //Lava data
+    private int lavaX = 212;
+    private int lavaY = 212;
+    private bool lavaStart = false;
+    private int count = 1;
 	private int[] lavaHeatMap;
+
+
 	public PathFinder pf;
 
     //The upper and lower limit in mm
@@ -55,8 +60,8 @@ public class SandpitDepthView : MonoBehaviour {
     public int viewX = 212;
     public int viewY = 212;
 	public int maxHeight = 0;
-	private int count = 10000;
-	private bool lavaTime = true;
+	public ushort highestPoint = 0;
+	public ushort lowestPoint = 0;
 
 
 	// Use this for initialization
@@ -67,12 +72,6 @@ public class SandpitDepthView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		timer += Time.deltaTime;
-		if (timer > delay) {
-			Debug.Log (count);
-			count--;
-			timer = 0;
-		}
         if (once)
         {
             //Debug.Log(dsm.Width);
@@ -82,15 +81,16 @@ public class SandpitDepthView : MonoBehaviour {
             //initializing all the lists
 			startMap = new byte[424 * 424]; //the map that constantly gets changed on frame update
 			finalMap = new byte[424 * 424]; //the obsticle map passed into the pathfinder
-			lavaHeatMap = new int[424 * 424];
-			sliced = new int[424 * 424];
 			colourDepth = new byte[424 * 424 * 4];
             texture = new Texture2D(424, 424, TextureFormat.RGBA32, false);
             standardDepth = new ushort[424 * 424];
             maskingLayer = new bool[424 * 424];
+            lavaMap = new bool[424 * 424];
             DrawMaskingCircle();
             return;
         }
+
+        getLavaMap();
 
         
         if (fromText == true)
@@ -121,7 +121,6 @@ public class SandpitDepthView : MonoBehaviour {
                     else
                     {
                         Mapcolour(depth[k], m);
-						sliced[m] = k;
                         m++;
                     }
                 }           
@@ -137,16 +136,19 @@ public class SandpitDepthView : MonoBehaviour {
 
         finalMap = startMap;
 
-		lavaHeatMap = pf.getHeatMap(3);
+        timer += Time.deltaTime;
+        if (timer > delay && lavaStart == true)
+        {
+            //Debug.Log(count);
+            count--;
+            timer = 0;
+        }
 	
 
 		//getting value of highest point of sand
-		for (int i=0; i<(424*424); i++) {
-			if (sliced[i] > max){
-				maxHeight = sliced[i];
-			}
-			
-		}
+	
+		//Debug.Log (highestPoint);
+		//Debug.Log (lowestPoint);
 
 	}
 
@@ -156,18 +158,16 @@ public class SandpitDepthView : MonoBehaviour {
         ushort thisDepth = depth;
         float layerDepth = (max - min) / 5; 
         thisDepth -= min;
+		int seaMonsterDepth = 40;
         float height = (float)max - (float)depth;
         if (maskingLayer[i] == true) {
 
-			if (lavaHeatMap[i] >= (count-25) && depth > min && depth < (min +10000-count)){
+			if (lavaMap[i] == true && depth >= min && depth < (min -(count*1.5)) && depth < max){
 
 				colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					colourDepth[i * 4 + 3] = 250;						
 				startMap[i] = 6;
-				if (count <8000) {
-					lavaTime = false;
-				}
 			} 
 
             else if (depth > min && depth <= (min + layerDepth))
@@ -215,7 +215,7 @@ public class SandpitDepthView : MonoBehaviour {
                 colourDepth[i * 4 + 3] = 255;
                 startMap[i] = 2;
             }
-            else if (depth >= max)
+			else if (depth >= max && depth < max+seaMonsterDepth)
             {
                 //Water
                 colourDepth[i * 4 + 0] = 0;
@@ -224,6 +224,14 @@ public class SandpitDepthView : MonoBehaviour {
                 colourDepth[i * 4 + 3] = 255; //(byte)(100 *(float)((height) / layerDepth));
                 startMap[i] = 1;
             }
+			else if (depth >= max+seaMonsterDepth){
+				//deep water
+				colourDepth[i * 4 + 0] = 0;
+				colourDepth[i * 4 + 1] = (byte)(50f + (25f * (float)((height) / layerDepth)));
+				colourDepth[i * 4 + 2] = (byte)(255f + (155 * (float)((height) / layerDepth)));
+				colourDepth[i * 4 + 3] = 255; //(byte)(100 *(float)((height) / layerDepth));
+				startMap[i] = 7;
+			}
             else
             {
                 colourDepth[i * 4 + 0] = 0;
@@ -244,18 +252,10 @@ public class SandpitDepthView : MonoBehaviour {
 
     }
 
-    private void fillColour(int i, ushort depth)
-    {
-
-    }
 
     public byte[] getMap(){
         return finalMap;
     }
-
-	public void lavaOn(){
-		lavaTime = true;
-	}
 
     //Control button functions
     public void toggleKineticOn()
@@ -287,9 +287,14 @@ public class SandpitDepthView : MonoBehaviour {
             }
         }
 
-        int thing = UnityEngine.Random.Range(0, terrainQuantity);
+        if (terrainQuantity > 0)
+        {
+            //If there is at least one valid location
+            int thing = UnityEngine.Random.Range(0, terrainQuantity);
 
-        return terrainPos[thing];
+            return terrainPos[thing];
+        }
+        return -1;
     }
 
     public void DrawMaskingCircle()
@@ -300,7 +305,7 @@ public class SandpitDepthView : MonoBehaviour {
             for (int j = 0; j < 423; j++)
             {
                 //Debug.Log("test");
-                if (isInCircle(j,i) == true)
+                if (isInCircle(j, i, viewX, viewY, viewScale) == true)
                 {
                     maskingLayer[i * 424 + (j + 1)] = true;
                 }
@@ -314,7 +319,7 @@ public class SandpitDepthView : MonoBehaviour {
     }
 
     //Takes x and y values and checks if position is inside circle of certain scale
-    public bool isInCircle(int x, int y)
+    public bool isInCircle(int x, int y, int viewX, int viewY, int viewScale)
     {
         if(Math.Pow(x - viewX, 2) + Math.Pow(y - viewY, 2) <= Math.Pow(viewScale, 2)){
             //print("inCircle");
@@ -323,6 +328,41 @@ public class SandpitDepthView : MonoBehaviour {
         else{
             return false;
         }
+    }
+
+
+    private void getLavaMap()
+    {
+        if (lavaStart == false)
+        {
+            return;
+        }
+        //Debug.Log("test");
+        //The loop which converts depth into terran colour
+        for (int i = 0; i < 423; i++)
+        {
+            for (int j = 0; j < 423; j++)
+            {
+                //Debug.Log("test");
+                if (isInCircle(j, i, lavaX, lavaY, count) == true)
+                {
+                    lavaMap[i * 424 + (j + 1)] = true;
+                }
+                else
+                {
+                    lavaMap[i * 424 + (j + 1)] = false;
+                }
+            }
+
+        }
+    }
+
+    public void volcanoStart(int x, int y)
+    {
+        Debug.Log("starting");
+        lavaX = x;
+        lavaY = y;
+        lavaStart = true;
     }
 
 }

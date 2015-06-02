@@ -917,7 +917,12 @@ MonoBehaviour:
   - {fileID: 186306, guid: 3991a0378b7d2654697b875dad8cd1cc, type: 2}
   - {fileID: 177290, guid: dde3f8eac412b904085cc8ab896711b0, type: 2}
   - {fileID: 194480, guid: c2ef7bcc804ae1e4b96f67ce7a4d197a, type: 2}
-  volcano: {fileID: 122318, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
+  volcano: {fileID: 127380, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
+  seaMonster: {fileID: 150786, guid: 250b6fa46c97ac54ca6873ddc901ea28, type: 2}
+  volcanoSpawn: 1
+  seaMonsterSpawn: 1
+  seaMonsterX: 0
+  seaMonsterY: 0
 --- !u!4 &276978490
 Transform:
   m_ObjectHideFlags: 0
@@ -972,6 +977,8 @@ MonoBehaviour:
   viewX: 212
   viewY: 212
   maxHeight: 0
+  highestPoint: 0
+  lowestPoint: 0
 --- !u!23 &291463359
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3694,6 +3701,7 @@ MonoBehaviour:
   sdv: {fileID: 291463358}
   delay: .5
   timer: 0
+  sc: {fileID: 276978489}
 --- !u!4 &2132926842
 Transform:
   m_ObjectHideFlags: 0

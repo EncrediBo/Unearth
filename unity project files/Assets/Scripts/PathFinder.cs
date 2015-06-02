@@ -23,9 +23,14 @@ public class PathFinder : MonoBehaviour {
     private int finalX = 180;
     private int finalY = 180;
 
-    //Starting coordinates
+    //Starting coordinates for heatmaps
     private int startX = 270;
     private int startY = 270;
+
+	public SpawnControl sc;
+
+	private int seaMonsterX = 0;
+	private int seaMonsterY = 0;
 
     private static PathFinder _instance;
 
@@ -104,11 +109,17 @@ public class PathFinder : MonoBehaviour {
     }
 
 
+
+
     private void DrawHeatMap()
     {
         doingStuff = true;
+		seaMonsterX = sc.getSeaMonsterX();
+		seaMonsterY = sc.getSeaMonsterY();
         flood(finalX, finalY, 10000, 2); //Movement for land
-        floodAgain(finalX, finalY, 10000, 1); //Movement for sea
+		if (seaMonsterX != 0 && seaMonsterY != 0) {
+			floodAgain (seaMonsterX, seaMonsterY, 10000, 1); //Movement for sea
+		}
     }
 
     private void flood(int xStart, int yStart, int heatStart, byte level)
@@ -224,26 +235,26 @@ public class PathFinder : MonoBehaviour {
             {
                 heatMap1[y * 424 + x] = heat;
 
-                if ((x - 1) > 0 && finalMap[y * 424 + (x - 1)] == level && heatMap1[y * 424 + (x - 1)] == 0)
+                if ((x - 1) > 0 && finalMap[y * 424 + (x - 1)] == level && heatMap1[y * 424 + (x - 1)] == 0 || finalMap[y * 424 + (x - 1)] == 7)
                 {
                     xQueue.Enqueue(x - 1);
                     yQueue.Enqueue(y);
                     heatQueue.Enqueue(heat - 1);
                 }
-                if ((x + 1) < 423 && finalMap[y * 424 + (x + 1)] == level && heatMap1[y * 424 + (x + 1)] == 0)
+                if ((x + 1) < 423 && finalMap[y * 424 + (x + 1)] == level && heatMap1[y * 424 + (x + 1)] == 0 || finalMap[y * 424 + (x - 1)] == 7)
                 {
                     xQueue.Enqueue(x + 1);
                     yQueue.Enqueue(y);
                     heatQueue.Enqueue(heat - 1);
                 }
 
-                if ((y - 1) > 0 && finalMap[(y - 1) * 424 + x] == level && heatMap1[(y - 1) * 424 + x] == 0)
+                if ((y - 1) > 0 && finalMap[(y - 1) * 424 + x] == level && heatMap1[(y - 1) * 424 + x] == 0 || finalMap[y * 424 + (x - 1)] == 7)
                 {
                     xQueue.Enqueue(x);
                     yQueue.Enqueue(y - 1);
                     heatQueue.Enqueue(heat - 1);
                 }
-                if ((y + 1) < 423 && finalMap[(y + 1) * 424 + x] == level && heatMap1[(y + 1) * 424 + x] == 0)
+                if ((y + 1) < 423 && finalMap[(y + 1) * 424 + x] == level && heatMap1[(y + 1) * 424 + x] == 0 || finalMap[y * 424 + (x - 1)] == 7)
                 {
                     xQueue.Enqueue(x);
                     yQueue.Enqueue(y + 1);
@@ -271,7 +282,5 @@ public class PathFinder : MonoBehaviour {
     public byte getTerrain(int x, int y){
         return finalMap[y * 424 + (x + 1)];
     }
-
-
 
 }

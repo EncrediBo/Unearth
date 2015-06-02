@@ -1,19 +1,17 @@
 fileFormatVersion: 2
-guid: ee3762f2847c36d4da7869b95b50ca16
-timeCreated: 1432684124
+guid: 61b996374d42eb5409bc018e70d8ef9a
+timeCreated: 1433211815
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Fish (white)_0
-    21300002: Fish (white)_1
-    21300004: Fish (white)_2
-    21300006: Fish (white)_3
-    21300008: Fish (white)_4
-    21300010: Fish (white)_5
-    21300012: Fish (white)_6
-    21300014: Fish (white)_7
-    21300016: Fish (white)_8
-    21300018: Fish (white)_9
+    21300000: frog_white(backwards)_0
+    21300002: frog_white(backwards)_1
+    21300004: frog_white(backwards)_2
+    21300006: frog_white(backwards)_3
+    21300008: frog_white(backwards)_4
+    21300010: frog_white(backwards)_5
+    21300012: frog_white(backwards)_6
+    21300014: frog_white(backwards)_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -53,109 +51,89 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Fish (white)_0
+    - name: frog_white(backwards)_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 14
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_1
-      rect:
-        serializedVersion: 2
-        x: 42
-        y: 2
-        width: 13
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_2
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 2
-        width: 12
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_3
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 1
-        width: 15
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_4
-      rect:
-        serializedVersion: 2
-        x: 137
-        y: 1
-        width: 18
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_5
-      rect:
-        serializedVersion: 2
-        x: 169
+        x: 0
         y: 0
-        width: 13
-        height: 31
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_6
+    - name: frog_white(backwards)_1
       rect:
         serializedVersion: 2
-        x: 200
-        y: 1
-        width: 15
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_7
-      rect:
-        serializedVersion: 2
-        x: 229
-        y: 1
-        width: 18
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_8
-      rect:
-        serializedVersion: 2
-        x: 266
+        x: 64
         y: 0
-        width: 13
-        height: 31
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Fish (white)_9
+    - name: frog_white(backwards)_2
       rect:
         serializedVersion: 2
-        x: 297
-        y: 2
-        width: 13
-        height: 29
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white(backwards)_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white(backwards)_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white(backwards)_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white(backwards)_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: frog_white(backwards)_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
