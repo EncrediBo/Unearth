@@ -137,8 +137,8 @@ public class SandpitDepthView : MonoBehaviour {
         timer += Time.deltaTime;
         if (timer > delay && lavaStart == true)
         {
-            //Debug.Log(count);
-            count-=2;
+            count+=2;
+			Debug.Log(count);
 			getLavaMap();
             timer = 0;
         }
@@ -161,11 +161,12 @@ public class SandpitDepthView : MonoBehaviour {
         float height = (float)max - (float)depth;
         if (maskingLayer[i] == true) {
 
-			if (lavaMap[i] == true && depth >= min && depth < (min -(count*0.8)) && depth < max){
+			if (lavaMap[i] == true && depth >= min && depth < (min +(count*0.8)) && depth < max){
 
-				colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
+				colourDepth[i * 4 + 0] = (byte)(250 - count);//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
-				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					colourDepth[i * 4 + 3] = 250;						
+				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					
+				colourDepth[i * 4 + 3] = 250;						
 				startMap[i] = 6;
 			} 
 
@@ -343,7 +344,7 @@ public class SandpitDepthView : MonoBehaviour {
             for (int j = 0; j < 423; j++)
             {
                 //Debug.Log("test");
-                if (isInCircle(j, i, lavaX, lavaY, (2*count)/3) == true)
+                if (isInCircle(j, i, lavaX, lavaY, (2*count)/3) == true && count < 250)
                 {
                     lavaMap[i * 424 + (j + 1)] = true;
                 }

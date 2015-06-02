@@ -124,9 +124,16 @@ public class LandManControl : Animal
 
     protected override void CheckTerrain()
     {
-        //Spawning code
-        if (terrainMap[mapY * 424 + mapX] != 2 && terrainMap[mapY * 424 + mapX] != 3)//|| heatMap[mapY * 424 + mapX] == 0)
+		byte here = terrainMap [mapY * 424 + mapX];
+		if (here != 2 && here != 3)//|| heatMap[mapY * 424 + mapX] == 0)
         {
+			if(here == 6){
+				life -= 100;
+			}
+			else{
+				life--;
+			}
+
             //The animal is currently in a terrain that it cannot move in
             ChangeState(State.Drowning);
             // change the animator here to the idle animation

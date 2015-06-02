@@ -40,6 +40,8 @@ public abstract class Animal : MonoBehaviour
     protected float delay = 0.02f; //50 times every second
     protected float timer = 0f;
 
+	protected int life = 10000;
+
     protected int[] heatMap;
     protected byte[] terrainMap;
 
@@ -81,6 +83,10 @@ public abstract class Animal : MonoBehaviour
         LoadPos();
 
         CheckTerrain();
+
+		if (life <= 0) {
+			Kill ();
+		}
 
         if (heatMap[mapY * 424 + mapX] == 10000)
         {

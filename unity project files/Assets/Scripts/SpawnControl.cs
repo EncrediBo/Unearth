@@ -90,7 +90,9 @@ public class SpawnControl : MonoBehaviour {
         {
             int spawnLoc = sdv.getRandomSpawnLocation(3); //get spawn location in ushort
             //convert to x and y values
-            int x = spawnLoc % 424;
+			if (spawnLoc != -1)
+			{
+			int x = spawnLoc % 424;
             int y = spawnLoc / 424;
             //convert to canvas values
             float mapX = (212 - x) * pixelHeight;
@@ -101,6 +103,7 @@ public class SpawnControl : MonoBehaviour {
             Instantiate(landMan[Random.Range(0, landMan.Length)], new Vector3(mapX, mapY, 0f), Quaternion.identity);
             landManCount++;
             //seaManSpawn = false;
+			}
         }
 
         if (seaManSpawn == true && seaManCount < seaManMax)

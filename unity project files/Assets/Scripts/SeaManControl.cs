@@ -41,6 +41,7 @@ public class SeaManControl : Animal
         if (terrainMap[mapY * 424 + mapX] != 1 && terrainMap[mapY * 424 + mapX] != 7)//|| heatMap[mapY * 424 + mapX] == 0)
         {
             //The animal is currently in a terrain that it cannot move in
+			life --;
             ChangeState(State.Drowning);
             //Debug.Log("State should be drowning but is: " + myState);
 			//change the animator here to drowning animation
