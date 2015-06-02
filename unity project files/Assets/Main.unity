@@ -185,6 +185,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dsm: {fileID: 1528692207}
   depth: 
+--- !u!1001 &52477323
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.36793005
+      objectReference: {fileID: 0}
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.36793005
+      objectReference: {fileID: 0}
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 476676, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0e21af9674531d245b8c78a7c4c9371e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &60889236
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +960,9 @@ MonoBehaviour:
   - {fileID: 177290, guid: dde3f8eac412b904085cc8ab896711b0, type: 2}
   - {fileID: 194480, guid: c2ef7bcc804ae1e4b96f67ce7a4d197a, type: 2}
   volcano: {fileID: 122318, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
+  seaMonster: {fileID: 168628, guid: 250b6fa46c97ac54ca6873ddc901ea28, type: 2}
+  seaMonsterX: 0
+  seaMonsterY: 0
 --- !u!4 &276978490
 Transform:
   m_ObjectHideFlags: 0
@@ -971,7 +1016,8 @@ MonoBehaviour:
   viewScale: 212
   viewX: 212
   viewY: 212
-  maxHeight: 0
+  highestPoint: 0
+  lowestPoint: 0
 --- !u!23 &291463359
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3694,6 +3740,7 @@ MonoBehaviour:
   sdv: {fileID: 291463358}
   delay: .5
   timer: 0
+  sc: {fileID: 276978489}
 --- !u!4 &2132926842
 Transform:
   m_ObjectHideFlags: 0

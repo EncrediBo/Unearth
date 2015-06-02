@@ -14,10 +14,16 @@ public class SeaManControl : Animal
     // Use this for initialization
     protected override void Update()
     {
+		//Choose which heat map as path finding guide
+		heatMap = pathFinder.getHeatMap(type);
         
-        //If this have not been move for more than 90 frames start seeking
-        if (myState != State.Seeking)
+		if (heatMap [mapY * 424 + mapX] > 0) {
+			ChangeState(State.Hunting);
+			base.animator.SetBool("drowning", false);
+		}
+        else if (myState != State.Seeking)
         {
+			//If this have not been move for more than 90 frames start seeking
             ChangeState(State.Seeking);
 			// change the animator here to the idle animation
             //Debug.Log("state should be seeking but is: " + myState);

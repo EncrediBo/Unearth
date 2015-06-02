@@ -27,6 +27,11 @@ public class PathFinder : MonoBehaviour {
     private int startX = 270;
     private int startY = 270;
 
+	public SpawnControl sc;
+
+	private int seaMonsterX = 0;
+	private int seaMonsterY = 0;
+
     private static PathFinder _instance;
 
     public static PathFinder Instance()
@@ -104,11 +109,17 @@ public class PathFinder : MonoBehaviour {
     }
 
 
+
+
     private void DrawHeatMap()
     {
         doingStuff = true;
+		seaMonsterX = sc.getSeaMonsterX();
+		seaMonsterY = sc.getSeaMonsterY();
         flood(finalX, finalY, 10000, 2); //Movement for land
-        floodAgain(finalX, finalY, 10000, 1); //Movement for sea
+		if (seaMonsterX != 0 && seaMonsterY != 0) {
+			floodAgain (seaMonsterX, seaMonsterY, 10000, 1); //Movement for sea
+		}
     }
 
     private void flood(int xStart, int yStart, int heatStart, byte level)
