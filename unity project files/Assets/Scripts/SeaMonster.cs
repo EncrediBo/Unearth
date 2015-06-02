@@ -15,7 +15,7 @@ public class SeaMonster : Plant
 
     protected override void Update()
     {
-		myAngle ++;
+		myAngle += 5;
 		transform.rotation = Quaternion.Euler(0, 0, -myAngle);
         if (pathFinder.getTerrain(mapX, mapY) != 7)
         {
