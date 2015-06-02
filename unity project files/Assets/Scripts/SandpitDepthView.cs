@@ -60,7 +60,8 @@ public class SandpitDepthView : MonoBehaviour {
     public int viewX = 212;
     public int viewY = 212;
 	public int maxHeight = 0;
-	private bool lavaTime = true;
+	public ushort highestPoint = 0;
+	public ushort lowestPoint = 0;
 
 
 	// Use this for initialization
@@ -142,6 +143,12 @@ public class SandpitDepthView : MonoBehaviour {
             count--;
             timer = 0;
         }
+	
+
+		//getting value of highest point of sand
+	
+		//Debug.Log (highestPoint);
+		//Debug.Log (lowestPoint);
 
 	}
 
@@ -151,6 +158,7 @@ public class SandpitDepthView : MonoBehaviour {
         ushort thisDepth = depth;
         float layerDepth = (max - min) / 5; 
         thisDepth -= min;
+		int seaMonsterDepth = 40;
         float height = (float)max - (float)depth;
         if (maskingLayer[i] == true) {
 
@@ -160,9 +168,6 @@ public class SandpitDepthView : MonoBehaviour {
 				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 2] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));					colourDepth[i * 4 + 3] = 250;						
 				startMap[i] = 6;
-				if (count <8000) {
-					lavaTime = false;
-				}
 			} 
 
             else if (depth > min && depth <= (min + layerDepth))
@@ -210,7 +215,7 @@ public class SandpitDepthView : MonoBehaviour {
                 colourDepth[i * 4 + 3] = 255;
                 startMap[i] = 2;
             }
-            else if (depth >= max)
+			else if (depth >= max && depth < max+seaMonsterDepth)
             {
                 //Water
                 colourDepth[i * 4 + 0] = 0;
@@ -219,6 +224,14 @@ public class SandpitDepthView : MonoBehaviour {
                 colourDepth[i * 4 + 3] = 255; //(byte)(100 *(float)((height) / layerDepth));
                 startMap[i] = 1;
             }
+			else if (depth >= max+seaMonsterDepth){
+				//deep water
+				colourDepth[i * 4 + 0] = 0;
+				colourDepth[i * 4 + 1] = (byte)(50f + (25f * (float)((height) / layerDepth)));
+				colourDepth[i * 4 + 2] = (byte)(255f + (155 * (float)((height) / layerDepth)));
+				colourDepth[i * 4 + 3] = 255; //(byte)(100 *(float)((height) / layerDepth));
+				startMap[i] = 7;
+			}
             else
             {
                 colourDepth[i * 4 + 0] = 0;
@@ -239,18 +252,10 @@ public class SandpitDepthView : MonoBehaviour {
 
     }
 
-    private void fillColour(int i, ushort depth)
-    {
-
-    }
 
     public byte[] getMap(){
         return finalMap;
     }
-
-	public void lavaOn(){
-		lavaTime = true;
-	}
 
     //Control button functions
     public void toggleKineticOn()

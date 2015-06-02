@@ -14,10 +14,16 @@ public class SeaManControl : Animal
     // Use this for initialization
     protected override void Update()
     {
+		//Choose which heat map as path finding guide
+		heatMap = pathFinder.getHeatMap(type);
         
-        //If this have not been move for more than 90 frames start seeking
-        if (myState != State.Seeking)
+		if (heatMap [mapY * 424 + mapX] > 0) {
+			ChangeState(State.Hunting);
+			base.animator.SetBool("drowning", false);
+		}
+        else if (myState != State.Seeking)
         {
+			//If this have not been move for more than 90 frames start seeking
             ChangeState(State.Seeking);
 			// change the animator here to the idle animation
             //Debug.Log("state should be seeking but is: " + myState);
@@ -31,7 +37,7 @@ public class SeaManControl : Animal
     protected override void CheckTerrain()
     {
         //Spawning code
-        if (terrainMap[mapY * 424 + mapX] != 1)//|| heatMap[mapY * 424 + mapX] == 0)
+        if (terrainMap[mapY * 424 + mapX] != 1 && terrainMap[mapY * 424 + mapX] != 7)//|| heatMap[mapY * 424 + mapX] == 0)
         {
             //The animal is currently in a terrain that it cannot move in
             ChangeState(State.Drowning);
