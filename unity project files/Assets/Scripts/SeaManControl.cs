@@ -9,6 +9,7 @@ public class SeaManControl : Animal
     {
         type = 2;
         terrain = 1;
+		delay = 0.05f;
         base.Start();
     }
     // Use this for initialization
