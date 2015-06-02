@@ -37,8 +37,8 @@ public abstract class Animal : MonoBehaviour
 
     //Movement speed delay
     //Time interval for recalculation
-    private float delay = 0.02f; //Every two seconds
-    private float timer = 0f;
+    protected float delay = 0.02f; //50 times every second
+    protected float timer = 0f;
 
     protected int[] heatMap;
     protected byte[] terrainMap;

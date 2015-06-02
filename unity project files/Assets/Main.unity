@@ -917,7 +917,7 @@ MonoBehaviour:
   - {fileID: 186306, guid: 3991a0378b7d2654697b875dad8cd1cc, type: 2}
   - {fileID: 177290, guid: dde3f8eac412b904085cc8ab896711b0, type: 2}
   - {fileID: 194480, guid: c2ef7bcc804ae1e4b96f67ce7a4d197a, type: 2}
-  volcano: {fileID: 122318, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
+  volcano: {fileID: 127380, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
 --- !u!4 &276978490
 Transform:
   m_ObjectHideFlags: 0

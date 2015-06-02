@@ -8,6 +8,7 @@ public class LandManControl : Animal
     // Use this for initialization
     protected override void Start()
     {
+        delay = 0.05f;
         type = 1;
         terrain = 3;
         base.Start();

@@ -43,7 +43,7 @@ public class SpawnControl : MonoBehaviour {
     private static bool seaKillerSpawn = true;
 
     //Volcano
-    private static bool volcanoSpawn = true;
+    public bool volcanoSpawn = true;
 
     protected const float pixelHeight = 0.023585f;
 
@@ -147,20 +147,25 @@ public class SpawnControl : MonoBehaviour {
 
         if (volcanoSpawn == true)
         {
+
             int spawnLoc = sdv.getRandomSpawnLocation(6); //get spawn location in ushort
             //convert to x and y values
-            int x = spawnLoc % 424;
-            int y = spawnLoc / 424;
-            //convert to canvas values
-            float mapX = (212 - x) * pixelHeight;
-            float mapY = (212 - y) * pixelHeight;
+            if (spawnLoc != -1)
+            {
+                //Debug.Log(spawnLoc);
+                int x = spawnLoc % 424;
+                int y = spawnLoc / 424;
+                //convert to canvas values
+                float mapX = (212 - x) * pixelHeight;
+                float mapY = (212 - y) * pixelHeight;
 
-            //Debug.Log(seaManCount);
-            //Debug.Log(seaManMax);
-            Instantiate(volcano, new Vector3(mapX, mapY, 0f), Quaternion.identity);
-            volcanoSpawn = false;
-            //seaManSpawn = false;
-        }
+                //Debug.Log(seaManCount);
+                //Debug.Log(seaManMax);
+                Instantiate(volcano, new Vector3(mapX, mapY, 0f), Quaternion.identity);
+                volcanoSpawn = false;
+                //seaManSpawn = false;
+            }
+         }
         //Instantiate(seaMan);
 	}
 

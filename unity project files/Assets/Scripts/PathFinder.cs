@@ -23,7 +23,7 @@ public class PathFinder : MonoBehaviour {
     private int finalX = 180;
     private int finalY = 180;
 
-    //Starting coordinates
+    //Starting coordinates for heatmaps
     private int startX = 270;
     private int startY = 270;
 
@@ -271,7 +271,5 @@ public class PathFinder : MonoBehaviour {
     public byte getTerrain(int x, int y){
         return finalMap[y * 424 + (x + 1)];
     }
-
-
 
 }
