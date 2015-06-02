@@ -5,13 +5,13 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SeaMonster 1
+  m_Name: GameObject
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
-    m_StateMachine: {fileID: 110744894}
+    m_StateMachine: {fileID: 110715894}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -20,16 +20,16 @@ AnimatorController:
     m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_MultiThreadedStateMachine: 1
---- !u!1102 &110209150
+--- !u!1102 &110299506
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: whirlpoolWhite2
-  m_Speed: .5
+  m_Name: whirlpoolWhite2 0
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -39,7 +39,7 @@ AnimatorState:
   m_Mirror: 0
   m_Motion: {fileID: 7400000, guid: 5f8bd09699993fa4d9ae7dc8ead5444e, type: 2}
   m_Tag: 
---- !u!1107 &110744894
+--- !u!1107 &110715894
 AnimatorStateMachine:
   serializedVersion: 5
   m_ObjectHideFlags: 1
@@ -48,18 +48,18 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 110209150}
-    m_Position: {x: 252, y: 72, z: 0}
+    m_State: {fileID: 110299506}
+    m_Position: {x: 252, y: 36, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
     data:
-      first: {fileID: 110744894}
+      first: {fileID: 110715894}
       second: []
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 24, y: 36, z: 0}
-  m_EntryPosition: {x: 24, y: 96, z: 0}
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 110209150}
+  m_DefaultState: {fileID: 110299506}

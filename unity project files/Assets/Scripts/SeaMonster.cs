@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SeaMonster : Plant
 {
+	private int myAngle = 0;
+
     // Use this for initialization
     protected override void Start()
     {
@@ -13,12 +15,15 @@ public class SeaMonster : Plant
 
     protected override void Update()
     {
-
+		myAngle ++;
+		transform.rotation = Quaternion.Euler(0, 0, -myAngle);
         if (pathFinder.getTerrain(mapX, mapY) != 7)
         {
             //If i am in water, i die
             Kill();
         }
+
+
     }
 
     protected virtual void Kill()
