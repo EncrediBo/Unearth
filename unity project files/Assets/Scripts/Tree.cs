@@ -13,7 +13,8 @@ public class Tree : Plant{
 
     protected override void Update()
     {
-        if (pathFinder.getTerrain(mapX, mapY) == 1)
+		byte x = pathFinder.getTerrain(mapX, mapY);
+		if (x == 1 || x == 6)
         {
             //If i am in water, i die
             Kill();

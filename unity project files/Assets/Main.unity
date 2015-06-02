@@ -918,6 +918,7 @@ MonoBehaviour:
   - {fileID: 177290, guid: dde3f8eac412b904085cc8ab896711b0, type: 2}
   - {fileID: 194480, guid: c2ef7bcc804ae1e4b96f67ce7a4d197a, type: 2}
   volcano: {fileID: 127380, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
+  fire: {fileID: 140108, guid: 36501f6a92df4d349ba5468688dbd3e3, type: 2}
   seaMonster: {fileID: 128164, guid: 250b6fa46c97ac54ca6873ddc901ea28, type: 2}
   volcanoSpawn: 1
   seaMonsterSpawn: 1

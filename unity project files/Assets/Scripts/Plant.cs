@@ -24,8 +24,8 @@ public abstract class Plant : MonoBehaviour {
     protected int mapY;
 
     //Age of the plant
-    private int life = 0;
-    private int lifeSpan;
+    protected int life = 0;
+    protected int lifeSpan;
 
 	//counter for spawn animation
 	private int scaleCount = 0;
@@ -118,6 +118,11 @@ public abstract class Plant : MonoBehaviour {
             scaleDownCount++;
             return;
         }
+
+		//Check to see if fire will be lite
+		if (pathFinder.getTerrain (mapX, mapY) == 6) {
+			spawnControl.LightFire(mapX, mapY);
+		}
         spawnControl.Spawn(-type);
         Destroy(this.gameObject);
         life = 0;

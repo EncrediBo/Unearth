@@ -16,6 +16,7 @@ public class SpawnControl : MonoBehaviour {
     public GameObject[] landPlants;  //Array of tree prefabs.
     public GameObject[] seaPlants;	//Array of sea plants prefabs
     public GameObject volcano;
+	public GameObject fire;
 	public GameObject seaMonster;
 
     //All the data keeping track of the stuff that has spawned
@@ -46,6 +47,7 @@ public class SpawnControl : MonoBehaviour {
     //Volcano
     public bool volcanoSpawn = true;
 
+	//Whirlpool
 	public bool seaMonsterSpawn = true;
 
 	public int seaMonsterX;
@@ -250,6 +252,13 @@ public class SpawnControl : MonoBehaviour {
 	public int getSeaMonsterY(){
 		return seaMonsterY;
 	}
+
+	public void LightFire(int x, int y){
+		float mapX = (212 - x) * pixelHeight;
+		float mapY = (212 - y) * pixelHeight;
+		Instantiate(fire, new Vector3(mapX, mapY, 0f), Quaternion.identity);
+	}
+
     
 
 }
