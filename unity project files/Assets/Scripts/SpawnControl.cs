@@ -45,7 +45,7 @@ public class SpawnControl : MonoBehaviour {
     private static bool seaKillerSpawn = true;
 
     //Volcano
-    public bool volcanoSpawn = true;
+    private bool volcanoSpawn = false;
 
 	//Whirlpool
 	public bool seaMonsterSpawn = true;
@@ -259,6 +259,8 @@ public class SpawnControl : MonoBehaviour {
 		Instantiate(fire, new Vector3(mapX, mapY, 0f), Quaternion.identity);
 	}
 
-    
+    public void VolcanoDeath() {
+		volcanoSpawn = true;
+	}
 
 }

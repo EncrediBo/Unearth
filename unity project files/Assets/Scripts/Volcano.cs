@@ -34,7 +34,7 @@ public class Volcano : Plant
     protected virtual void Kill()
     {
         //Talk to spawn
-        spawnControl.volcanoSpawn = true;
+		spawnControl.VolcanoDeath();
         Destroy(this.gameObject);
     }
     

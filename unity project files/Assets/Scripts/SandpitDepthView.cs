@@ -162,7 +162,7 @@ public class SandpitDepthView : MonoBehaviour {
         float height = (float)max - (float)depth;
         if (maskingLayer[i] == true) {
 
-			if (lavaMap[i] == true && depth >= min && depth < (min -(count*1.5)) && depth < max){
+			if (lavaMap[i] == true && depth >= min && depth < (min -(count*0.5)) && depth < max){
 
 				colourDepth[i * 4 + 0] = 250;//(byte)(255 - (50 * thisDepth / (layerDepth)));
 				colourDepth[i * 4 + 1] = 0;//(byte)(255 - (50 * thisDepth / (layerDepth)));
@@ -344,7 +344,7 @@ public class SandpitDepthView : MonoBehaviour {
             for (int j = 0; j < 423; j++)
             {
                 //Debug.Log("test");
-                if (isInCircle(j, i, lavaX, lavaY, count) == true)
+                if (isInCircle(j, i, lavaX, lavaY, count/2) == true)
                 {
                     lavaMap[i * 424 + (j + 1)] = true;
                 }

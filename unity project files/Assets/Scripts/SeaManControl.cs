@@ -18,7 +18,7 @@ public class SeaManControl : Animal
 		//Choose which heat map as path finding guide
 		heatMap = pathFinder.getHeatMap(type);
         
-		if (heatMap [mapY * 424 + mapX] > 0) {
+		if (heatMap [mapY * 424 + mapX] > 9950) {
 			ChangeState(State.Hunting);
 			base.animator.SetBool("drowning", false);
 		}
