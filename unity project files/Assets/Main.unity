@@ -920,7 +920,6 @@ MonoBehaviour:
   volcano: {fileID: 127380, guid: 9613fbb9e060c894b8292eca209fc100, type: 2}
   fire: {fileID: 140108, guid: 36501f6a92df4d349ba5468688dbd3e3, type: 2}
   seaMonster: {fileID: 128164, guid: 250b6fa46c97ac54ca6873ddc901ea28, type: 2}
-  volcanoSpawn: 1
   seaMonsterSpawn: 1
   seaMonsterX: 0
   seaMonsterY: 0
@@ -2379,48 +2378,6 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: -30}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0, y: 1}
---- !u!1001 &1196357720
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -1.36793005
-      objectReference: {fileID: 0}
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.36793005
-      objectReference: {fileID: 0}
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 448608, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 99fea5137d602b94e985260ca7cf3bc6, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1226643391
 GameObject:
   m_ObjectHideFlags: 0

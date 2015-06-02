@@ -8,7 +8,7 @@ public class Fire : Plant {
 	{
 		type = 3;
 		base.Start();
-		lifeSpan = 50;
+		lifeSpan = 360;
 	} 
 	// Update is called once per frame
 	

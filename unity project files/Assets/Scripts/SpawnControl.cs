@@ -45,7 +45,7 @@ public class SpawnControl : MonoBehaviour {
     private static bool seaKillerSpawn = true;
 
     //Volcano
-    private bool volcanoSpawn = false;
+    private bool volcanoSpawn = true;
 
 	//Whirlpool
 	public bool seaMonsterSpawn = true;
@@ -83,6 +83,7 @@ public class SpawnControl : MonoBehaviour {
             delay -= Time.deltaTime;
             return;
         }
+		delay = 0.2f;
         //finalMap = sdv.getMap();
         //Debug.Log("seamancount smaller than seamanmax: "+ (seaManCount < seaManMax));
         if (landManSpawn == true && landManCount < landManMax)
